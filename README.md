@@ -61,3 +61,44 @@ sudo ln -s /etc/nginx/sites-available/openschooldesk /etc/nginx/sites-enabled/
 sudo nginx -t
 sudo systemctl restart nginx
 ```
+
+## Backend (Contact Form)
+
+The contact form requires a simple Node.js backend to send emails via SMTP.
+
+### 1. Setup
+```bash
+cd server
+npm install
+cp .env.example .env
+# Edit .env and add your SMTP credentials (IONOS)
+```
+
+### 2. Running the server
+You can use `pm2` to keep the server running in the background:
+```bash
+sudo npm install -g pm2
+pm2 start index.js --name "openschooldesk-api"
+```
+
+### 3. Nginx Reverse Proxy
+To make the API accessible from the frontend, add a proxy location to your Nginx configuration:
+```nginx
+server {
+    ...
+    location /api {
+        proxy_pass http://localhost:3001;
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection 'upgrade';
+        proxy_set_header Host $host;
+        proxy_cache_bypass $http_upgrade;
+    }
+}
+```
+
+## Secrets Management
+For production, it is recommended to store secrets (like the SMTP password) in a `.env` file within the `server/` directory. Ensure this file is NOT committed to version control (it is included in `.gitignore`). On the server, ensure the file has restricted permissions:
+```bash
+chmod 600 server/.env
+```
