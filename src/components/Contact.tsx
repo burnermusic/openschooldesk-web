@@ -31,7 +31,7 @@ const Contact: React.FC = () => {
       }
     } catch (error) {
       // Log error internally as requested
-      const messagePreview = formData.message.split('\n').slice(0, 5).join('\n');
+      const messagePreview = formData.message.substring(0, 100);
       console.error('Contact Form Error:', {
         email: formData.email,
         messagePreview: messagePreview,
