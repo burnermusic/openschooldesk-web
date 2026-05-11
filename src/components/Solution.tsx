@@ -38,7 +38,7 @@ const Solution: React.FC = () => {
           <div className="relative">
             <div className="bg-white p-8 rounded-xl border border-slate-200 shadow-sm">
               <img
-                alt="Tech Mockup"
+                alt="Mockup der openschooldesk-Oberfläche, die verschiedene Schul-Anwendungen in einem Dashboard integriert"
                 className="rounded-lg w-full grayscale-[50%]"
                 src="https://lh3.googleusercontent.com/aida-public/AB6AXuBx_JbxBk9ZaE6l69z89UDg9Jgd5kWwuSIoWPL4_R_jytAPZs2SirTNA-jj6hYE12KnfNiofXDmgUzsJ-Aqe8xnEvt2UzQwCtOBsijG_xU5dshmSbFnA_72tLg8hBTdROEgqiNONRmp5ZNrDI1o1Ul92QpOn2Fg0Ayf2aHApMqhuzq8_C7CeOXnLMezjrSwTm6RZOwfmFjoqnhbPIB8xztDSbJ6ib8CsXUhOpDtXs7jNfVNfQ1XYbDpnvjvfa2Ionav1rDlM4XreOSH"
               />

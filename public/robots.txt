@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://openschooldesk.org/sitemap.xml
