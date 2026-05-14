@@ -22,7 +22,7 @@ const Hero: React.FC = () => {
       <div className="mt-24 max-w-6xl mx-auto px-6">
         <div className="relative rounded-xl overflow-hidden border border-slate-800 bg-slate-900 aspect-video">
           <img
-            alt="A high-end, minimalist 3D isometric visualization of openschooldesk connecting various school tools."
+            alt="Isometrische Visualisierung von openschooldesk, das verschiedene Schul-IT-Dienste zentral verbindet"
             className="w-full h-full object-cover"
             src="https://lh3.googleusercontent.com/aida-public/AB6AXuARCobdCeR7hy6lOLOhRCvi6o3IqF8VcCfn837RG-jgjzrI9XVjg5shvCn9YcXwfgVFAYS2u1ri3RfL_MUDYTnfWO19sS76cdjB7Cu2dXiDheah8H_jh2xgltY6KjAuQkv2uz59eMd3ZHCneTBOHlWvNpgWot6PbGdndPi1UDhsx_ifXYwyhAE5hjOBhTX7P9Z81a0k6weKlHqNTqEp2XGBfhqjFfn0yoLRuzz0tSM-obTe2-De4bFAN4lZUV-qG3f0iyDeSxBO3vac"
           />
