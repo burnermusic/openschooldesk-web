@@ -1,7 +1,8 @@
 import React from 'react'
 import type { RefObject } from 'react';
-import { PhotoSlot } from './photo-slot';
+
 import type { ContactHandle } from './contact';
+import heroLeadership from '../assets/hero-leadership.jpg';
 
 interface PageLeadershipProps {
   contactRef: RefObject<ContactHandle | null>;
@@ -76,7 +77,13 @@ export const PageLeadership: React.FC<PageLeadershipProps> = ({ contactRef }) =>
                 <a href="#pillars" className="btn warm">Die drei Säulen</a>
               </div>
             </div>
-            <PhotoSlot variant="leadership" aspect="aspect-4-3" />
+            <div className="photo-slot aspect-4-3">
+              <img
+                src={heroLeadership}
+                alt="Schulleiterin mit Tablet und digitalem Klassenbuch"
+                style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
+              />
+            </div>
           </div>
         </div>
       </section>
