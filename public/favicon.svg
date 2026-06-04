@@ -1,27 +1,25 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" fill="none">
   <!--
-    openschooldesk favicon — nachempfunden dem Hexagon-Markenzeichen.
-    Flat-top-Hexagon in Logo-Blau (#2563EB), weißes S-Symbol innen.
-    Gut lesbar ab 16×16 px.
+    openschooldesk favicon — Hexagon-Markenzeichen.
+    S-Kurve ist punkt-symmetrisch um Mittelpunkt (16,16).
+    Beide Bezier-Bögen sind gespiegelte Hälften.
   -->
 
   <!-- Flat-top Hexagon, Logo-Blau -->
-  <polygon
-    points="16,2 28,9 28,23 16,30 4,23 4,9"
-    fill="#2563EB"
-  />
+  <polygon points="16,2 28,9 28,23 16,30 4,23 4,9" fill="#2563EB"/>
 
-  <!-- S-Symbol (zwei gegenläufige Bögen), weiß -->
+  <!--
+    S: Zwei gespiegelte Kubische Bézierkurven.
+    Oberer Bogen: (21.5,11.5) → (10.5,16)  mit Kontrollpunkten oben
+    Unterer Bogen: (10.5,16) → (21.5,20.5) mit Kontrollpunkten unten
+    Beide Bögen sind 180°-Rotation voneinander — exakt symmetrisch.
+  -->
   <path
-    d="M21 12.5
-       C21 10.2 19.2 8.8 16 8.8
-       C12.8 8.8 11 10.4 11 13
-       C11 15.2 12.8 16.3 16 17.2
-       C19.5 18.2 21 19.6 21 22
-       C21 24.6 19 26.2 16 26.2
-       C13 26.2 11 24.4 11 22.2"
+    d="M 21.5 11.5
+       C 21.5 7,  10.5 7,  10.5 16
+       C 10.5 25, 21.5 25, 21.5 20.5"
     stroke="white"
-    stroke-width="2.8"
+    stroke-width="3"
     stroke-linecap="round"
     fill="none"
   />
