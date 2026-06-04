@@ -26,14 +26,14 @@ export const Footer: React.FC<FooterProps> = ({ deep = false }) => {
           <div className="footer-col">
             <h5>Für Träger &amp; IT</h5>
             <a href="#/it">Stack-Architektur</a>
-            <a href="#github">GitHub</a>
-            <a href="#docs">Dokumentation</a>
+            <a href="https://github.com/burnermusic/openschooldesk-web" target="_blank" rel="noopener">GitHub</a>
+            <a href="/blog/">Blog</a>
           </div>
           <div className="footer-col">
             <h5>Rechtliches</h5>
-            <a href="#privacy">Datenschutz</a>
-            <a href="#imprint">Impressum</a>
-            <a href="#license">Lizenz (AGPLv3)</a>
+            <a href="/datenschutz/">Datenschutz</a>
+            <a href="/impressum/">Impressum</a>
+            <a href="https://www.gnu.org/licenses/agpl-3.0.de.html" target="_blank" rel="noopener">Lizenz (AGPLv3)</a>
           </div>
         </div>
       </div>
