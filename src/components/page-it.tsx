@@ -79,8 +79,8 @@ export const PageIT: React.FC<PageITProps> = ({ contactRef: _contactRef }) => {
         <div className="container">
           <div style={{ maxWidth: 720, marginBottom: 56 }}>
             <span className="eyebrow">Der Stack</span>
-            <h2 className="h-headline">Nichts neu erfunden. Alles richtig zusammengesetzt.</h2>
-            <p className="body" style={{ marginTop: 16, maxWidth: 620 }}>
+            <h2 className="h-headline h-on-dark">Nichts neu erfunden. Alles richtig zusammengesetzt.</h2>
+            <p className="body" style={{ marginTop: 16, maxWidth: 620, color: '#94A3B8' }}>
               Wir bauen keine Software, die es schon gibt. Wir integrieren bewährte
               Open-Source-Komponenten unter einer Identität, einer Oberfläche und einem
               Provisionierungs-Skript.

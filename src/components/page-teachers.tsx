@@ -2,6 +2,7 @@ import React from 'react'
 import type { RefObject } from 'react';
 import { PhotoSlot } from './photo-slot';
 import type { ContactHandle } from './contact';
+import heroTeacher from '../assets/hero-teacher.jpg';
 
 interface PageTeachersProps {
   contactRef: RefObject<ContactHandle | null>;
@@ -34,7 +35,13 @@ export const PageTeachers: React.FC<PageTeachersProps> = ({ contactRef }) => {
                 <a href="#tag" className="btn warm">Ein typischer Schultag</a>
               </div>
             </div>
-            <PhotoSlot variant="school" aspect="aspect-4-3" />
+            <div className="photo-slot aspect-4-3">
+              <img
+                src={heroTeacher}
+                alt="Lehrkraft mit Tablet im Klassenraum"
+                style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
+              />
+            </div>
           </div>
         </div>
       </section>
