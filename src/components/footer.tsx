@@ -26,7 +26,6 @@ export const Footer: React.FC<FooterProps> = ({ deep = false }) => {
           <div className="footer-col">
             <h5>Für Träger &amp; IT</h5>
             <a href="#/it">Stack-Architektur</a>
-            <a href="https://github.com/burnermusic/openschooldesk-web" target="_blank" rel="noopener">GitHub</a>
             <a href="/blog/">Blog</a>
           </div>
           <div className="footer-col">

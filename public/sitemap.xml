@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
-  <!-- Marketing-Site: Audience-Views -->
+  <!-- Marketing-Site -->
   <url>
     <loc>https://openschooldesk.org/</loc>
     <lastmod>2026-06-04</lastmod>
@@ -44,9 +44,15 @@
   <!-- Blog -->
   <url>
     <loc>https://openschooldesk.org/blog/</loc>
-    <lastmod>2026-06-04</lastmod>
+    <lastmod>2026-01-14</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://openschooldesk.org/blog/digitalpakt-2-open-source/</loc>
+    <lastmod>2026-01-14</lastmod>
+    <changefreq>never</changefreq>
+    <priority>0.7</priority>
   </url>
   <url>
     <loc>https://openschooldesk.org/blog/souveraene-schul-it/</loc>
@@ -63,6 +69,18 @@
   <url>
     <loc>https://openschooldesk.org/blog/ucs-school-erklaert/</loc>
     <lastmod>2026-05-05</lastmod>
+    <changefreq>never</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://openschooldesk.org/blog/bsi-konformer-schulserver/</loc>
+    <lastmod>2025-12-09</lastmod>
+    <changefreq>never</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://openschooldesk.org/blog/letzte-meile-open-source-schulen/</loc>
+    <lastmod>2025-11-18</lastmod>
     <changefreq>never</changefreq>
     <priority>0.7</priority>
   </url>
