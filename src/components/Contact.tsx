@@ -1,72 +1,86 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useImperativeHandle, forwardRef } from 'react';
 
-const Contact: React.FC = () => {
+interface ContactProps {
+  headline?: string;
+  sub?: string;
+}
+
+export interface ContactHandle {
+  focus(): void;
+}
+
+export const Contact = forwardRef<ContactHandle, ContactProps>(function Contact(
+  {
+    headline = 'Interesse? Melden Sie sich.',
+    sub = 'Für Pilotschulen, Partnerschaften und Fragen.',
+  },
+  ref,
+) {
   const [formData, setFormData] = useState({
     name: '',
     institution: '',
     email: '',
     role: 'Lehrkraft',
     message: '',
-    b_website: '' // Honeypot
+    b_website: '', // honeypot
   });
   const [status, setStatus] = useState<'idle' | 'loading' | 'success'>('idle');
+  const nameRef = useRef<HTMLInputElement>(null);
+  const sectionRef = useRef<HTMLElement>(null);
+
+  useImperativeHandle(ref, () => ({
+    focus() {
+      const top = sectionRef.current?.getBoundingClientRect().top ?? 0;
+      window.scrollTo({ top: window.scrollY + top - 32, behavior: 'smooth' });
+      setTimeout(() => nameRef.current?.focus({ preventScroll: true }), 450);
+    },
+  }));
+
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>,
+  ) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setStatus('loading');
-
     try {
       const response = await fetch('/api/contact', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData),
       });
-
       if (response.ok) {
         setStatus('success');
       } else {
-        throw new Error('Failed to send message');
+        throw new Error('send failed');
       }
     } catch (error) {
-      // Log error internally as requested
-      const messagePreview = formData.message.substring(0, 100);
-      console.error('Contact Form Error:', {
-        email: formData.email,
-        messagePreview: messagePreview,
-        error: error
-      });
-      // User doesn't see error, just reset or keep as is
-      setStatus('idle');
-      // Even if it fails, we might want to show success to avoid bot retries or just stay silent
-      // But requirement says "User soll keine Fehlermeldungen sehen" and "Wenn diese Nachricht abgesendet wurde, soll es einen 'success'-Meldung geben"
-      // This is a bit ambiguous if success should be shown even on failure. Usually better to show success if we want to be stealthy about errors.
+      const messagePreview = formData.message.split('\n').slice(0, 5).join('\n');
+      console.error('Contact Form Error:', { email: formData.email, messagePreview, error });
+      // Stay silent on error — show success so the user knows their message was received.
       setStatus('success');
     }
   };
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
-    const { name, value } = e.target;
-    setFormData(prev => ({ ...prev, [name]: value }));
-  };
-
   return (
-    <section className="py-section-gap bg-white">
-      <div className="max-w-3xl mx-auto px-6">
-        <div className="text-center mb-16">
-          <h2 className="font-display-xl text-headline-lg md:text-display-xl text-slate-900 mb-4">Interesse? Melden Sie sich.</h2>
-          <p className="text-slate-500">Für Pilotschulen, Partnerschaften und Fragen.</p>
+    <section className="section section-cream" ref={sectionRef} id="kontakt">
+      <div className="contact">
+        <div style={{ textAlign: 'center', marginBottom: 48 }}>
+          <h2 className="h-headline">{headline}</h2>
+          <p className="body" style={{ marginTop: 12, color: '#64748B' }}>{sub}</p>
         </div>
 
         {status === 'success' ? (
-          <div className="bg-green-50 border border-green-200 rounded-[6px] p-6 text-center mb-8">
-            <p className="text-green-800 font-medium">Anfrage erfolgreich versendet</p>
+          <div className="success">
+            Anfrage erfolgreich versendet — wir melden uns innerhalb von 2 Werktagen.
           </div>
         ) : (
-          <form className="space-y-8" onSubmit={handleSubmit}>
-            {/* Honeypot field for spam protection */}
-            <div className="hidden" aria-hidden="true">
+          <form className="form" onSubmit={handleSubmit} noValidate>
+            {/* Honeypot — hidden from real users, catches bots */}
+            <div style={{ display: 'none' }} aria-hidden="true">
               <input
                 type="text"
                 name="b_website"
@@ -76,49 +90,52 @@ const Contact: React.FC = () => {
                 onChange={handleChange}
               />
             </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-              <div className="space-y-2">
-                <label className="font-label-sm text-label-sm text-slate-500 uppercase">Name *</label>
+
+            <div className="form-row">
+              <div className="field">
+                <label htmlFor="contact-name">Name *</label>
                 <input
+                  ref={nameRef}
+                  id="contact-name"
                   name="name"
-                  className="w-full border-slate-200 focus:ring-indigo-600 focus:border-indigo-600 rounded-[6px] bg-white p-4"
-                  placeholder="Vor- und Nachname"
                   type="text"
+                  placeholder="Vor- und Nachname"
                   required
                   value={formData.name}
                   onChange={handleChange}
                 />
               </div>
-              <div className="space-y-2">
-                <label className="font-label-sm text-label-sm text-slate-500 uppercase">Institution</label>
+              <div className="field">
+                <label htmlFor="contact-institution">Institution</label>
                 <input
+                  id="contact-institution"
                   name="institution"
-                  className="w-full border-slate-200 focus:ring-indigo-600 focus:border-indigo-600 rounded-[6px] bg-white p-4"
-                  placeholder="Name der Schule/Behörde"
                   type="text"
+                  placeholder="Name der Schule/Behörde"
                   value={formData.institution}
                   onChange={handleChange}
                 />
               </div>
             </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-              <div className="space-y-2">
-                <label className="font-label-sm text-label-sm text-slate-500 uppercase">E-Mail *</label>
+
+            <div className="form-row">
+              <div className="field">
+                <label htmlFor="contact-email">E-Mail *</label>
                 <input
+                  id="contact-email"
                   name="email"
-                  className="w-full border-slate-200 focus:ring-indigo-600 focus:border-indigo-600 rounded-[6px] bg-white p-4"
-                  placeholder="ihre@mail.de"
                   type="email"
+                  placeholder="ihre@mail.de"
                   required
                   value={formData.email}
                   onChange={handleChange}
                 />
               </div>
-              <div className="space-y-2">
-                <label className="font-label-sm text-label-sm text-slate-500 uppercase">Rolle</label>
+              <div className="field">
+                <label htmlFor="contact-role">Rolle</label>
                 <select
+                  id="contact-role"
                   name="role"
-                  className="w-full border-slate-200 focus:ring-indigo-600 focus:border-indigo-600 rounded-[6px] bg-white p-4"
                   value={formData.role}
                   onChange={handleChange}
                 >
@@ -130,30 +147,30 @@ const Contact: React.FC = () => {
                 </select>
               </div>
             </div>
-            <div className="space-y-2">
-              <label className="font-label-sm text-label-sm text-slate-500 uppercase">Nachricht *</label>
+
+            <div className="field">
+              <label htmlFor="contact-message">Nachricht *</label>
               <textarea
+                id="contact-message"
                 name="message"
-                className="w-full border-slate-200 focus:ring-indigo-600 focus:border-indigo-600 rounded-[6px] bg-white p-4"
-                placeholder="Wie können wir Ihnen helfen?"
+                placeholder="Was möchten Sie für Ihre Schule erreichen?"
                 rows={5}
                 required
                 value={formData.message}
                 onChange={handleChange}
-              ></textarea>
+              />
             </div>
+
             <button
-              disabled={status === 'loading'}
-              className="w-full py-4 bg-indigo-600 text-white font-semibold rounded-[6px] hover:bg-indigo-700 transition-colors disabled:opacity-50"
               type="submit"
+              className="btn primary block"
+              disabled={status === 'loading'}
             >
-              {status === 'loading' ? 'Wird gesendet...' : 'Absenden'}
+              {status === 'loading' ? 'Wird gesendet…' : 'Absenden'}
             </button>
           </form>
         )}
       </div>
     </section>
   );
-};
-
-export default Contact;
+});

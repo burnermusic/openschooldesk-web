@@ -1,32 +1,42 @@
 import React from 'react';
+import logoWordmark from '../assets/logo-wordmark.png';
 
-const Footer: React.FC = () => {
+interface FooterProps {
+  deep?: boolean;
+}
+
+export const Footer: React.FC<FooterProps> = ({ deep = false }) => {
   return (
-    <footer className="bg-slate-900 w-full pt-20 pb-12 border-t border-slate-800">
-      <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-start gap-8">
-        <div className="max-w-xs">
-          <span className="text-lg font-bold text-white mb-2 block font-['Inter']">openschooldesk</span>
-          <p className="text-slate-400 text-sm mb-4">© 2026 openschooldesk. Made in Germany.</p>
-          <div className="flex gap-4">
-            <span className="text-indigo-400 material-symbols-outlined">terminal</span>
-            <span className="text-indigo-400 material-symbols-outlined">public</span>
-          </div>
+    <footer className={`footer${deep ? ' on-deep' : ''}`}>
+      <div className="container footer-inner">
+        <div className="footer-brand">
+          <img src={logoWordmark} alt="openschooldesk" />
+          <p>Eine Schulapp, die alle vereint. Open Source, DSGVO-konform, gebaut für den Schulalltag.</p>
+          <p style={{ fontSize: 12, color: deep ? '#64748B' : '#94A3B8' }}>
+            © 2026 openschooldesk · Made in Germany · AGPLv3
+          </p>
         </div>
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-12">
-          <div className="space-y-4">
-            <h5 className="text-white font-medium mb-4">Projekt</h5>
-            <a className="block text-slate-400 hover:text-indigo-300 transition-colors text-sm" href="#">GitHub</a>
-            <a className="block text-slate-400 hover:text-indigo-300 transition-colors text-sm" href="#">Lizenz</a>
+        <div className="footer-cols">
+          <div className="footer-col">
+            <h5>Für Schulen</h5>
+            <a href="#/">Lehrkräfte</a>
+            <a href="#/leitung">Schulleitung</a>
+            <a href="#/eltern">Eltern</a>
           </div>
-          <div className="space-y-4">
-            <h5 className="text-white font-medium mb-4">Rechtliches</h5>
-            <a className="block text-slate-400 hover:text-indigo-300 transition-colors text-sm" href="#">Datenschutz</a>
-            <a className="block text-slate-400 hover:text-indigo-300 transition-colors text-sm" href="#">Impressum</a>
+          <div className="footer-col">
+            <h5>Für Träger &amp; IT</h5>
+            <a href="#/it">Stack-Architektur</a>
+            <a href="#github">GitHub</a>
+            <a href="#docs">Dokumentation</a>
+          </div>
+          <div className="footer-col">
+            <h5>Rechtliches</h5>
+            <a href="#privacy">Datenschutz</a>
+            <a href="#imprint">Impressum</a>
+            <a href="#license">Lizenz (AGPLv3)</a>
           </div>
         </div>
       </div>
     </footer>
   );
 };
-
-export default Footer;
