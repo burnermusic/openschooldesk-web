@@ -1,6 +1,7 @@
 import React from 'react'
 import type { RefObject } from 'react';
 import { PhotoSlot } from './photo-slot';
+import heroParents from '../assets/hero-parents.jpg';
 import type { ContactHandle } from './contact';
 
 interface PageParentsProps {
@@ -74,7 +75,13 @@ export const PageParents: React.FC<PageParentsProps> = ({ contactRef }) => {
                 <a href="#was" className="btn warm">Was Sie als Eltern sehen</a>
               </div>
             </div>
-            <PhotoSlot variant="family" aspect="aspect-4-3" />
+            <div className="photo-slot aspect-4-3">
+              <img
+                src={heroParents}
+                alt="Mutter liest Schulnachrichten auf dem Smartphone"
+                style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
+              />
+            </div>
           </div>
         </div>
       </section>
