@@ -1,8 +1,11 @@
 import React from 'react'
 import type { RefObject } from 'react';
-import { PhotoSlot } from './photo-slot';
+
 import type { ContactHandle } from './contact';
 import heroTeacher from '../assets/hero-teacher.jpg';
+import schulbildMorgens from '../assets/schulbild-morgens.jpg';
+import schulbildUnterricht from '../assets/schulbild-unterricht.jpg';
+import schulbildNachmittag from '../assets/schulbild-nachmittag.jpg';
 
 interface PageTeachersProps {
   contactRef: RefObject<ContactHandle | null>;
@@ -57,7 +60,9 @@ export const PageTeachers: React.FC<PageTeachersProps> = ({ contactRef }) => {
           </div>
           <div className="grid-3">
             <article className="card card-warm">
-              <PhotoSlot variant="desk" aspect="aspect-4-3" showMeta={false} />
+              <div className="photo-slot aspect-4-3">
+                <img src={schulbildMorgens} alt="Laptop mit Schulapp am Morgen" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
+              </div>
               <h3 className="h-md" style={{ marginTop: 20 }}>Morgens · 07:45</h3>
               <p className="body" style={{ marginTop: 8 }}>
                 Ein Login. Stundenplan, Materialien, Vertretungen, Klassenbuch – alles
@@ -65,7 +70,9 @@ export const PageTeachers: React.FC<PageTeachersProps> = ({ contactRef }) => {
               </p>
             </article>
             <article className="card card-warm">
-              <PhotoSlot variant="classroom" aspect="aspect-4-3" showMeta={false} />
+              <div className="photo-slot aspect-4-3">
+                <img src={schulbildUnterricht} alt="Tablet im Unterricht mit Schülern" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
+              </div>
               <h3 className="h-md" style={{ marginTop: 20 }}>Im Unterricht · 10:20</h3>
               <p className="body" style={{ marginTop: 8 }}>
                 Klassenraum aus der Cloud starten, Aufgabe verteilen, Bildschirme im
@@ -74,7 +81,9 @@ export const PageTeachers: React.FC<PageTeachersProps> = ({ contactRef }) => {
               </p>
             </article>
             <article className="card card-warm">
-              <PhotoSlot variant="students" aspect="aspect-4-3" showMeta={false} />
+              <div className="photo-slot aspect-4-3">
+                <img src={schulbildNachmittag} alt="Desktop-Arbeitsplatz am Nachmittag" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
+              </div>
               <h3 className="h-md" style={{ marginTop: 20 }}>Nachmittags · 15:30</h3>
               <p className="body" style={{ marginTop: 8 }}>
                 Korrekturen, Elternnachrichten, nächste Woche planen. Geht von
