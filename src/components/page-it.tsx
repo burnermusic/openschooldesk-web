@@ -1,6 +1,7 @@
 import React from 'react'
 import type { RefObject } from 'react';
-import { PhotoSlot } from './photo-slot';
+
+import heroIT from '../assets/hero-it.jpg';
 import type { ContactHandle } from './contact';
 
 interface PageITProps {
@@ -69,7 +70,13 @@ export const PageIT: React.FC<PageITProps> = ({ contactRef: _contactRef }) => {
                 </div>
               </div>
             </div>
-            <PhotoSlot variant="stack" aspect="aspect-4-3" showMeta={false} />
+            <div className="photo-slot aspect-4-3">
+              <img
+                src={heroIT}
+                alt="IT-Architekturdiagramm und Admin-Team an Workstations"
+                style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
+              />
+            </div>
           </div>
         </div>
       </section>
