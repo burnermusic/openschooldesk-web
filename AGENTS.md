@@ -1,253 +1,179 @@
-# AGENTS.md – openschooldesk-poc
+# AGENTS.md — openschooldesk-web
 
-> This file is the authoritative context for Jules and all AI coding agents.
-> Read this completely before touching any code. Never deviate from these rules.
-
----
-
-## Project Overview
-
-**openschooldesk** is an open-source Flutter app and web platform as a native extension for UCS@school by Univention. Goal: replace a School Server from Microsoft, or any other licensed system like IServ, sdui, logodidact, and others,   with a sovereign, GDPR-compliant, beautiful alternative.
-
-**Core Philosophy:**
-```
-UCS@school = the operating system (never modified)
-openschooldesk = the beautiful face in front (API client only)
-Safe and Secure Architecture matching GDPR, BSI-Grundschutz, Zero Trust, Open Source. 
-```
-
-**License:** AGPLv3 – all code must be AGPLv3 compatible.
+> Autoritative Kontextdatei für KI-Coding-Agents (Jules, Claude Code u.a.).
+> Vollständig lesen, bevor Code angefasst wird.
 
 ---
 
-## Repository Structure
+## Was dieses Repo ist
 
-```
-openschooldesk-poc/
-├── apps/
-│   ├── mobile/          ← Flutter (iOS/Android) – Phase 2
-│   └── web/             ← Next.js 14 PoC ← CURRENT FOCUS
-│
-├── packages/
-│   ├── api-client/      ← Kelvin + Keycloak client (shared)
-│   └── shared-types/    ← TypeScript types shared across apps
-│
-└── docs/
-    └── adr/             ← Architecture Decision Records (READ BEFORE CODING)
-```
+**openschooldesk-web** ist die Marketing-Website von openschooldesk —
+einer Open-Source-Plattform, die UCS@school als zentrales Identitäts-Backend
+nutzt und Lehrkräften, Schulleitungen, IT-Administratoren und Eltern eine
+einheitliche Oberfläche bietet.
+
+**Live:** https://openschooldesk.org  
+**Blog:** https://openschooldesk.org/blog/ (separates Repo: openschooldesk-blog)  
+**Lizenz:** AGPLv3
 
 ---
 
-## Tech Stack (Web PoC)
+## Tech Stack
 
-| Layer | Technology | Notes |
-|-------|-----------|-------|
-| Framework | Next.js 14 (App Router) | SSR + Server Components |
-| Language | TypeScript (strict mode) | No `any`, no `as` casts |
-| Styling | Tailwind CSS + shadcn/ui | Never inline styles for design |
-| Auth | NextAuth.js v5 (Auth.js) | Keycloak OIDC/PKCE provider |
-| Data Fetching | TanStack Query v5 | Client-side caching |
-| State | Zustand | UI state only (no server state) |
-| Package Manager | pnpm | Never use npm or yarn |
-
----
-
-## Critical Rules
-
-### Security (NON-NEGOTIABLE)
-1. **Tokens NEVER in browser storage** – Access tokens stay server-side only (httpOnly cookies via NextAuth)
-2. **Kelvin API calls via server-side proxy** – `/api/kelvin/*` routes proxy requests with token injection
-3. **No student/teacher PII in logs** – No `console.log` with user data in production code
-4. **CSRF protection** – NextAuth built-in, never disable it
-5. **No `dangerouslySetInnerHTML`** without explicit sanitization
-
-### Code Quality
-- TypeScript strict mode: `"strict": true` in tsconfig – no exceptions
-- All components: named exports only (no anonymous default exports)
-- File naming: kebab-case for files, PascalCase for components
-- No commented-out code in PRs
-- All user-facing strings: German (DE) – this is a German school product
-
-### GDPR / DSGVO
-- Kelvin API data: minimal data principle – only fetch what is displayed
-- No analytics, no tracking, no third-party scripts
-- All API responses: never cache user-identifiable data in localStorage
+| Schicht | Technologie |
+|---|---|
+| Framework | React 19 + Vite 8 |
+| Sprache | TypeScript 6 (strict) |
+| Styling | Globales CSS (`src/index.css`) — kein Tailwind mehr |
+| Fonts | Work Sans (Headlines), Inter (Body) via Google Fonts |
+| Icons | Material Symbols Outlined via Google Fonts CDN |
+| Build | `npm run build` → `dist/` |
+| Deploy | pscp → `/var/www/openschooldesk-web/dist/` auf Ubuntu-Server |
+| Webserver | nginx mit Certbot/Let's Encrypt (openschooldesk.org) |
 
 ---
 
-## Architecture Patterns
+## Repo-Struktur
 
-### Route Structure (Next.js App Router)
 ```
-app/
-├── (auth)/
-│   ├── login/page.tsx          ← Login page with Keycloak redirect
-│   └── error/page.tsx          ← Auth error page
-├── (dashboard)/
-│   ├── layout.tsx              ← Protected layout (server component)
-│   ├── page.tsx                ← Dashboard home
-│   ├── klassen/
-│   │   ├── page.tsx            ← Class list
-│   │   └── [id]/page.tsx       ← Class detail + student list
-│   ├── stundenplan/page.tsx    ← Weekly timetable
-│   └── mitteilungen/
-│       ├── page.tsx            ← Message inbox
-│       └── neu/page.tsx        ← Compose message
-└── api/
-    └── kelvin/
-        └── [...path]/route.ts  ← Kelvin API proxy (authenticated)
-```
-
-### Server vs Client Components
-- Default: **Server Components** (no `"use client"`)
-- Add `"use client"` only for: interactive state, browser APIs, event handlers
-- Data fetching: server components fetch directly, client components use TanStack Query
-
-### Kelvin API Proxy Pattern
-```typescript
-// app/api/kelvin/[...path]/route.ts
-// Always use this pattern – never call Kelvin from client-side
-export async function GET(request: Request) {
-  const session = await auth(); // NextAuth session
-  if (!session?.accessToken) return Response.json({ error: 'Unauthorized' }, { status: 401 });
-  
-  const kelvinPath = /* extract from URL */;
-  const response = await fetch(`${KELVIN_BASE_URL}${kelvinPath}`, {
-    headers: { Authorization: `Bearer ${session.accessToken}` }
-  });
-  return Response.json(await response.json());
-}
+openschooldesk-web/
+├── public/
+│   └── favicon.svg            ← Indigo-Monogramm (kein Blitz)
+├── src/
+│   ├── assets/                ← Logos + verarbeitete Hero-JPEGs
+│   ├── components/
+│   │   ├── nav.tsx            ← Sticky Header + Audience-Switcher (Segmented Pill)
+│   │   ├── contact.tsx        ← Kontaktformular (POST /api/contact)
+│   │   ├── footer.tsx         ← Footer (dark-Variante für IT-Seite)
+│   │   ├── photo-slot.tsx     ← CSS-Gradient-Platzhalter mit SVG-Szenen
+│   │   ├── page-teachers.tsx  ← Lehrkräfte-Seite
+│   │   ├── page-leadership.tsx← Schulleitung-Seite
+│   │   ├── page-it.tsx        ← IT & Träger-Seite (dark shell)
+│   │   └── page-parents.tsx   ← Familien-Seite
+│   ├── App.tsx                ← Hash-Routing + Audience-State
+│   ├── index.css              ← Komplettes Design-System (Quelle der Wahrheit)
+│   └── main.tsx
+├── server/                    ← Express-Backend für Kontaktformular (nodemailer)
+├── design-reference/          ← Originale Design-Referenz — Read-only, nicht deployen
+│   └── marketing-web/         ← Vollständige Referenz in plain React/Babel
+├── index.html                 ← Google Fonts + Material Symbols geladen hier
+└── AGENTS.md                  ← Diese Datei
 ```
 
 ---
 
-## UCS@school / Kelvin API Reference
+## Audience-Routing (Hash-basiert)
 
-- **Base URL:** `https://ucs.simonboerner.de/ucsschool/kelvin/v1`
-- **Auth:** Bearer token from Keycloak (injected server-side)
-- **Docs:** https://kelvin-rest-api.readthedocs.io
+| Hash | Zielgruppe | Shell |
+|---|---|---|
+| `#/` | Lehrkräfte (Standard) | Hell / Warm |
+| `#/leitung` | Schulleitung | Hell / Warm |
+| `#/it` | IT & Träger | **Dunkel** |
+| `#/eltern` | Familien | Hell / Warm |
 
-### Key Endpoints
-```
-GET  /schools/                           → List schools
-GET  /classes/?school=IGS+Simon          → List classes
-GET  /classes/{name}                     → Class detail
-GET  /users/?school=IGS+Simon&role=teacher → List teachers
-GET  /users/?school=IGS+Simon&role=student → List students
-GET  /users/?class={className}           → Students in class
-```
-
-### Response Typing (in packages/shared-types)
-```typescript
-interface KelvinUser {
-  dn: string;
-  name: string;
-  firstname: string;
-  lastname: string;
-  school: string;
-  roles: string[];
-  school_classes: Record<string, string[]>;
-  email?: string;
-}
-
-interface KelvinClass {
-  dn: string;
-  name: string;
-  school: string;
-  users: string[];
-}
-```
+Die IT-Seite (`audience === 'it'`) aktiviert `.shell-dark` auf dem Root-Div —
+CSS-Kaskade verändert damit alle Kind-Elemente (Cards, Footer etc.).
 
 ---
 
-## Keycloak Configuration
+## Design-System (`src/index.css`)
 
-- **Issuer:** `https://ucs.simonboerner.de/realms/ucs` (verify with admin)
-- **Client ID:** `openschooldesk`
-- **Flow:** PKCE (Authorization Code + PKCE)
-- **Scopes:** `openid profile email`
-- **NextAuth Provider:** `import Keycloak from "next-auth/providers/keycloak"`
+**Surfaces:**
+- Warm Cream: `#FDFBF7` / `#F8F1E4` (`.section-cream`)
+- Dark Shell: `#08080E` / `#0F172A`
+- Hairline: `rgba(241, 233, 218, 0.7)`
 
-### Environment Variables Required
-```env
-# .env.local (NEVER commit this file)
-NEXTAUTH_URL=https://schule.simonboerner.de
-NEXTAUTH_SECRET=<min 32 chars, crypto random>
-KEYCLOAK_CLIENT_ID=openschooldesk
-KEYCLOAK_CLIENT_SECRET=<from Keycloak admin>
-KEYCLOAK_ISSUER=https://ucs.simonboerner.de/realms/ucs
-KELVIN_BASE_URL=https://ucs.simonboerner.de/ucsschool/kelvin/v1
-```
+**Primärfarbe:** Indigo `#4F46E5` (Hover `#4338CA`) — alle CTAs, Links, aktiver Switcher  
+**Amber** `#B45309` — nur Warn-/Problem-Kontexte  
+**Grün** `#065F46` / `#ECFDF5` — nur Erfolgs-States
 
----
+**Typografie:**
+- `.h-display` → Work Sans, 56 px, 700
+- `.h-headline` → Work Sans, 36 px, 600
+- `.h-md` → Work Sans, 22 px, 600
+- `.body-lg` → Inter, 19 px
+- `.body` → Inter, 16 px
 
-## Design System
+**Spacing:** 8 px-Grid. Button-Radius: 6 px. Card-Radius: 14 px.
 
-### Palette
-```
-Primary (Teacher role):    Indigo 600 (#4F46E5)
-Background:                Slate 50 (#F8FAFC)
-Surface:                   White (#FFFFFF)
-Border:                    Slate 200 (#E2E8F0)
-Text primary:              Slate 900 (#0F172A)
-Text muted:                Slate 500 (#64748B)
-Destructive:               Red 600 (#DC2626)
-Success:                   Emerald 600 (#059669)
-Warning:                   Amber 500 (#F59E0B)
-```
-
-### Typography
-```
-Display/Headings:   Geist (font-geist-sans)
-Body:               Geist (font-geist-sans)  
-Mono (IDs, codes):  Geist Mono (font-geist-mono)
-Base size:          16px (1rem)
-```
-
-### shadcn/ui Components (use these, don't reinvent)
-```
-Avatar, Badge, Button, Card, Command, Dialog, 
-DropdownMenu, Input, Label, Popover, ScrollArea,
-Select, Separator, Sheet, Skeleton, Switch, 
-Table, Tabs, Toast, Tooltip
-```
-
-### UX Principles
-- **Speed:** Optimistic UI updates. Skeleton loading states always.
-- **Teachers are busy:** Max 2 clicks to any action
-- **No cognitive load:** Clear visual hierarchy, generous whitespace
-- **German language:** All UI text in German ("Klassen", "Stundenplan", not "Classes", "Timetable")
-- **WCAG AA:** All interactive elements keyboard-accessible, sufficient color contrast
+CSS-Klassen aus `index.css` direkt in JSX verwenden — **kein Tailwind**.
 
 ---
 
-## Issue Workflow
+## Kontaktformular (kritisch — Logik nie verändern)
 
-1. Issues are written with User Story + Acceptance Criteria
-2. Label `jules` → Jules picks up and implements
-3. Jules creates PR → Claude reviews → merge to main
-4. DO NOT merge without at least one code review
+`src/components/contact.tsx` POSTet an `/api/contact` (Express Port 3001):
 
-## PR Rules
-
-- PR title: `feat: `, `fix: `, `chore: `, `docs: ` prefix (conventional commits)
-- PR description: What was changed + how to test
-- No PR without passing CI (lint + type check)
-- Screenshots for UI changes
+- Honeypot `b_website` (verstecktes Input fängt Bots)
+- **Silent-Error:** Bei Netzwerkfehler trotzdem `status = 'success'`
+- Per-Audience Headline + Subline kommen als Props aus `App.tsx` (`contactCopy`)
+- Backend `server/` bleibt unverändert
 
 ---
 
-## What Jules Should NOT Do
+## Fotos / Assets
 
-- Never use `any` in TypeScript
-- Never store tokens in localStorage or sessionStorage  
-- Never call Kelvin API directly from client components
-- Never commit `.env.local` or any secret
-- Never add analytics or tracking scripts
-- Never use `console.log` with PII data
-- Never skip loading and error states in UI components
-- Never use German umlauts in variable/function names (use `ae/oe/ue`)
+Verarbeitungs-Pipeline (Python/Pillow):
+1. Watermark entfernen (Gradient-Patch über die Ecke)
+2. Auf 4:3 zuschneiden (Motiv zentrieren)
+3. 1200 × 900 px JPEG, quality 88
+
+Fertige Dateien in `src/assets/`:
+- `hero-teacher.jpg` — Lehrkräfte Hero
+- `hero-leadership.jpg` — Schulleitung Hero
+- `hero-parents.jpg` — Familien Hero
+- `dsgvo-lock.jpg` — EU-Schloss (Elternseite, Datenschutz-Abschnitt)
+- `schulbild-morgens.jpg` / `-unterricht.jpg` / `-nachmittag.jpg` — Story-Strip
+
+Neue Fotos: erst Python-Skript (Vorlage aus Git-History), dann einsetzen.
 
 ---
 
-*Last updated: April 2026*
+## Deploy-Workflow
+
+```bash
+# 1. Bauen
+npm run build
+
+# 2. Geänderte Dateien hochladen (Hash im Dateinamen aus dist/assets/ ablesen)
+pscp -pw 'PASSWORT' dist/assets/NEUE-DATEI.js root@45.76.85.213:/var/www/openschooldesk-web/dist/assets/
+pscp -pw 'PASSWORT' dist/index.html            root@45.76.85.213:/var/www/openschooldesk-web/dist/
+
+# 3. nginx neu laden
+plink -batch -pw 'PASSWORT' root@45.76.85.213 "nginx -s reload"
+```
+
+**Server:** `45.76.85.213` · **User:** `root`  
+Credentials niemals committen.
+
+**nginx-Konfiguration:** `/etc/nginx/sites-enabled/openschooldesk`  
+- `/blog/` → `/var/www/openschooldesk-blog/` (Astro-Blog)
+- `/api` → Proxy zu `localhost:3001` (Kontaktformular-Backend)
+- `/` → Marketing-SPA mit `try_files … /index.html`
+
+---
+
+## Coding-Regeln
+
+- TypeScript strict, kein `any`, keine unbegründeten `as`-Casts
+- Named exports only (`export const Foo`, nie `export default function()`)
+- Dateinamen: kebab-case (`page-teachers.tsx`)
+- Komponentennamen: PascalCase (`PageTeachers`)
+- Keine deutschen Umlaute in Variablen-/Funktionsnamen (`ae/oe/ue`)
+- Alle UI-Texte auf Deutsch, formelles „Sie", keine Emojis
+- Kein Analytics, kein Tracking, keine Drittanbieter-Skripte außer Google Fonts
+- WCAG 2.1 AA: Focus-Ringe sichtbar (`outline: 2px solid #4F46E5`),
+  `aria-hidden="true"` auf dekorative Icons, `role="tablist"` auf Switcher
+
+## Was Agents NICHT tun sollen
+
+- Tailwind-Klassen verwenden (wurde entfernt)
+- `server/` anfassen
+- Honeypot oder Silent-Error im Kontaktformular ändern
+- `design-reference/` verändern (Read-only)
+- Neue npm-Abhängigkeiten ohne triftigen Grund
+- Secrets/Passwörter committen
+
+---
+
+*Zuletzt aktualisiert: Juni 2026*
