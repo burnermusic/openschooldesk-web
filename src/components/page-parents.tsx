@@ -1,6 +1,6 @@
 import React from 'react'
 import type { RefObject } from 'react';
-import { PhotoSlot } from './photo-slot';
+import dsgvoLock from '../assets/dsgvo-lock.jpg';
 import heroParents from '../assets/hero-parents.jpg';
 import type { ContactHandle } from './contact';
 
@@ -124,7 +124,13 @@ export const PageParents: React.FC<PageParentsProps> = ({ contactRef }) => {
       <section className="section section-cream">
         <div className="container">
           <div className="split split-tight">
-            <PhotoSlot variant="hallway" aspect="aspect-4-3" />
+            <div className="photo-slot aspect-4-3">
+              <img
+                src={dsgvoLock}
+                alt="EU-Schloss als Symbol für DSGVO-Datenschutz"
+                style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
+              />
+            </div>
             <div>
               <span className="eyebrow warm">Datenschutz, ehrlich.</span>
               <h2 className="h-headline">
