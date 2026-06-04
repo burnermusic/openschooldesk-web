@@ -27,6 +27,7 @@ export const Footer: React.FC<FooterProps> = ({ deep = false }) => {
             <h5>Für Träger &amp; IT</h5>
             <a href="#/it">Stack-Architektur</a>
             <a href="/blog/">Blog</a>
+            <a href="/ueber-uns/">Über uns</a>
           </div>
           <div className="footer-col">
             <h5>Rechtliches</h5>
