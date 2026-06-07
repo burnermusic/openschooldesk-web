@@ -54,7 +54,15 @@ openschooldesk-web/
 │   ├── index.css              ← Komplettes Design-System (Quelle der Wahrheit)
 │   └── main.tsx
 ├── server/                    ← Express-Backend für Kontaktformular (nodemailer)
-├── design-reference/          ← Originale Design-Referenz — Read-only, nicht deployen
+├── public/
+│   ├── favicon.svg            ← Hexagon-Ring auf Logo-Blau (#2563EB)
+│   ├── logo-wordmark.png      ← Fester Pfad für statische Seiten (kein Build-Hash)
+│   ├── sitemap.xml            ← Alle URLs inkl. Blog-Artikel
+│   ├── robots.txt
+│   ├── ueber-uns/             ← Standalone HTML-Seite + team.jpg
+│   ├── impressum/             ← Standalone HTML-Seite
+│   └── datenschutz/           ← Standalone HTML-Seite
+├── design-reference/          ← Originale Design-Referenz — gitignored, nicht deployen
 │   └── marketing-web/         ← Vollständige Referenz in plain React/Babel
 ├── index.html                 ← Google Fonts + Material Symbols geladen hier
 └── AGENTS.md                  ← Diese Datei
@@ -124,7 +132,10 @@ Fertige Dateien in `src/assets/`:
 - `hero-parents.jpg` — Familien Hero
 - `dsgvo-lock.jpg` — EU-Schloss (Elternseite, Datenschutz-Abschnitt)
 - `schulbild-morgens.jpg` / `-unterricht.jpg` / `-nachmittag.jpg` — Story-Strip
+- `author-ahlbrecht.jpg` / `author-schauer.jpg` — Blog-Autoren-Fotos (400×400)
+- `hero-it.jpg` — IT-Seite (vorhanden aber nicht in Verwendung, PhotoSlot aktiv)
 
+Quell-PNGs (Originale) sind per `.gitignore` ausgeschlossen.
 Neue Fotos: erst Python-Skript (Vorlage aus Git-History), dann einsetzen.
 
 ---
@@ -173,6 +184,14 @@ Credentials niemals committen.
 - `design-reference/` verändern (Read-only)
 - Neue npm-Abhängigkeiten ohne triftigen Grund
 - Secrets/Passwörter committen
+
+---
+
+## Statische Seiten (standalone HTML)
+
+`/ueber-uns/`, `/impressum/`, `/datenschutz/` sind eigenständige HTML-Dateien
+in `public/`, kein React. Sie teilen das Farbschema mit der Hauptseite und
+referenzieren `/logo-wordmark.png` (fester Pfad) und `/favicon.svg`.
 
 ---
 

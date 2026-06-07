@@ -13,6 +13,13 @@ dist-ssr
 *.local
 .env
 
+# Design-Referenz (read-only, nicht deployen)
+design-reference/
+
+# Quell-Bilder (grosse PNGs, verarbeitet als JPEGs in src/assets/)
+src/assets/*.png
+src/assets/hero.png
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
