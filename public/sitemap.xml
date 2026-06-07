@@ -57,6 +57,12 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://openschooldesk.org/blog/public-money-public-code/</loc>
+    <lastmod>2026-06-05</lastmod>
+    <changefreq>never</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://openschooldesk.org/blog/digitalpakt-2-open-source/</loc>
     <lastmod>2026-01-14</lastmod>
     <changefreq>never</changefreq>
