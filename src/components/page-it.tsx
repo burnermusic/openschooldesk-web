@@ -2,6 +2,8 @@ import React from 'react'
 import type { RefObject } from 'react';
 import { PhotoSlot } from './photo-slot';
 import type { ContactHandle } from './contact';
+import { LayerDiagram } from './layer-diagram';
+import { CompareMatrix } from './compare-matrix';
 
 interface PageITProps {
   contactRef: RefObject<ContactHandle | null>;
@@ -35,15 +37,17 @@ export const PageIT: React.FC<PageITProps> = ({ contactRef: _contactRef }) => {
           <div className="hero-split">
             <div>
               <span className="chip chip-dark" style={{ marginBottom: 24 }}>
-                Open Source · DSGVO · AGPLv3
+                Open Source · Deutscher Support · On-Prem-fähig
               </span>
               <h1 className="h-display h-on-dark">
-                Eine Zeile. Die ganze Schule digital.
+                Die App für euren Schulserver.
               </h1>
               <p className="body-lg" style={{ color: '#94A3B8', maxWidth: 520, marginTop: 20 }}>
-                Proxmox · OPNsense · UCS@school · Nextcloud · Moodle · Veyon · opsi —
-                vollständig konfiguriert, integriert, bereit. Bekannte Komponenten,
-                sinnvoll verbunden.
+                openschooldesk ist keine Schulserver-Distribution — wir bauen die
+                App-Schicht obendrauf. Bewährte Basis (u. a. UCS@school, im Einsatz an
+                tausenden Schulen), eine moderne, einheitliche UX darüber. Mit
+                deutschem Support vom Hersteller, integriert in hochsichere
+                Umgebungen, auch On-Premise.
               </p>
               <div className="ctas">
                 <a href="#github" className="btn primary">
@@ -74,34 +78,86 @@ export const PageIT: React.FC<PageITProps> = ({ contactRef: _contactRef }) => {
         </div>
       </section>
 
-      {/* Stack */}
+      {/* Stack: fremde Basis vs. eigene App */}
       <section className="section" id="stack">
         <div className="container">
           <div style={{ maxWidth: 720, marginBottom: 56 }}>
-            <span className="eyebrow">Der Stack</span>
-            <h2 className="h-headline h-on-dark">Nichts neu erfunden. Alles richtig zusammengesetzt.</h2>
+            <span className="eyebrow">Fremde Basis, eigene App</span>
+            <h2 className="h-headline h-on-dark">Der Schulserver ist nicht unser Produkt. Die App davor schon.</h2>
             <p className="body" style={{ marginTop: 16, maxWidth: 620, color: '#94A3B8' }}>
-              Wir bauen keine Software, die es schon gibt. Wir integrieren bewährte
-              Open-Source-Komponenten unter einer Identität, einer Oberfläche und einem
-              Provisionierungs-Skript.
+              openschooldesk ist kein Fork und kein UCS-Produkt. Wir setzen als
+              eigenständige App auf bewährter Schulserver-Infrastruktur auf — und
+              konzentrieren uns als Software-Firma vollständig auf das, was darüber
+              liegt: die Oberfläche, die Lehrkräfte, Schüler und Eltern tatsächlich
+              benutzen.
             </p>
           </div>
-          <div className="grid-3">
+
+          <div style={{ marginBottom: 40, maxWidth: 560 }}>
+            <LayerDiagram />
+          </div>
+
+          <div className="grid-2">
             <StackLayer
-              title="Infrastruktur"
-              items={['Proxmox VE', 'OPNsense', 'Nubus']}
-              note="Hypervisor · Firewall · Service-Provisionierung"
+              title="Was wir nicht erfunden haben"
+              items={['UCS@school', 'Proxmox VE', 'Keycloak (OIDC)', 'OPNsense']}
+              note="Fremde, bewährte Basis — im Einsatz an tausenden Schulen"
             />
             <StackLayer
-              title="Identität & Apps"
-              items={['UCS@school', 'Keycloak (OIDC)', 'Nextcloud · Moodle']}
-              note="LDAP · SSO · Files · Lernplattform"
+              title="Was wir bauen"
+              items={['openschooldesk App', 'Kelvin-Integration', 'Nextcloud · Open-Xchange', 'SSO zu weiteren Anwendungen']}
+              note="Die App-Schicht — eine Oberfläche statt zehn Logins"
             />
-            <StackLayer
-              title="Schul-Anwendungen"
-              items={['Veyon', 'opsi', 'Talk · Calendar']}
-              note="Klassenraum · Client-Management · Kommunikation"
-            />
+          </div>
+        </div>
+      </section>
+
+      {/* Wachsendes Ökosystem */}
+      <section className="section section-alt">
+        <div className="container">
+          <div style={{ maxWidth: 720 }}>
+            <span className="eyebrow">Wachsendes Ökosystem</span>
+            <h2 className="h-headline">Eine App, die mitwächst.</h2>
+            <p className="body" style={{ marginTop: 16, maxWidth: 620 }}>
+              Nextcloud und Open-Xchange sind bereits sauber integriert — ein Login,
+              eine Oberfläche, kein Bruch im Nutzererlebnis. Weitere pädagogische
+              Tools binden wir per SSO ein, statt eigene Insellösungen zu bauen.
+              Schritt für Schritt wird aus vielen Werkzeugen eine durchgängige App.
+            </p>
+            <div className="stack" style={{ marginTop: 24 }}>
+              <span className="stack-badge">Nextcloud</span>
+              <span className="stack-badge">Open-Xchange</span>
+              <span className="stack-badge">SSO · weitere Anwendungen</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Lizenz & Unabhängigkeit */}
+      <section className="section">
+        <div className="container">
+          <div style={{ maxWidth: 720 }}>
+            <span className="eyebrow">Keine Lizenzgebühren, keine Abhängigkeiten</span>
+            <h2 className="h-headline h-on-dark">Quelloffen, nach dem Public-Money-Public-Code-Prinzip.</h2>
+            <p className="body" style={{ marginTop: 16, maxWidth: 620, color: '#94A3B8' }}>
+              AGPLv3 lizenziert — öffentliche Mittel verdienen quelloffenen Code.
+              Keine Lizenzgebühren pro Nutzer, kein Lock-in bei einem einzelnen
+              Anbieter. Eigene Kundenanpassungen sind jederzeit möglich, ohne den
+              Quellcode zu verlassen.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* Vergleich */}
+      <section className="section section-alt">
+        <div className="container">
+          <div style={{ maxWidth: 720, marginBottom: 40 }}>
+            <span className="eyebrow">Im Vergleich</span>
+            <h2 className="h-headline">Wie openschooldesk gegen den Markt steht.</h2>
+          </div>
+          <div style={{ background: '#fff', border: '1px solid #F1E9DA', borderRadius: 16, overflow: 'hidden' }}>
+            <CompareMatrix compact />
           </div>
         </div>
       </section>

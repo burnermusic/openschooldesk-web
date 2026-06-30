@@ -111,16 +111,19 @@ export const PageLeadership: React.FC<PageLeadershipProps> = ({ contactRef }) =>
               <div className="chip chip-warm" style={{ marginBottom: 16 }}>Kosten</div>
               <h3 className="h-md">Keine Lizenzgebühren pro Schüler.</h3>
               <p className="body" style={{ marginTop: 12 }}>
-                AGPLv3 lizenziert. Sie zahlen für Betrieb und Support — nie für die
-                Software. Planungssicherheit über Haushaltsjahre hinweg, ohne Lock-in.
+                AGPLv3 lizenziert, nach dem Public-Money-Public-Code-Prinzip. Sie
+                zahlen für Betrieb und Support — nie für die Software. Eigene
+                Kundenanpassungen sind jederzeit möglich, ohne Lock-in bei einem
+                einzelnen Anbieter.
               </p>
             </article>
             <article className="card card-warm">
-              <div className="chip chip-primary" style={{ marginBottom: 16 }}>Pädagogik</div>
-              <h3 className="h-md">Erfunden für den Schulalltag.</h3>
+              <div className="chip chip-primary" style={{ marginBottom: 16 }}>Letzte Meile</div>
+              <h3 className="h-md">Eine App, kein Tool-Wirrwarr.</h3>
               <p className="body" style={{ marginTop: 12 }}>
-                Vom Klassenbuch bis zum digitalen Schulhof — gebaut mit Lehrkräften,
-                nicht für sie. Was nicht im Unterricht hilft, gibt es hier nicht.
+                Wir sind eine Software-Firma, die sich auf die App konzentriert —
+                Nextcloud, Open-Xchange und über SSO sämtliche weitere Anwendungen
+                sind bereits integriert. Eine Oberfläche statt zehn Insellösungen.
               </p>
             </article>
           </div>
@@ -140,31 +143,6 @@ export const PageLeadership: React.FC<PageLeadershipProps> = ({ contactRef }) =>
         </div>
       </section>
 
-      {/* Quote */}
-      <section className="section">
-        <div className="container">
-          <article className="card-quote" style={{ maxWidth: 820, margin: '0 auto', textAlign: 'center', padding: 48 }}>
-            <span
-              className="material-symbols-outlined"
-              aria-hidden="true"
-              style={{ color: '#C7D2FE', fontSize: 36, marginBottom: 16 }}
-            >
-              format_quote
-            </span>
-            <p className="quote-text" style={{ fontSize: 26, lineHeight: 1.4 }}>
-              „Wir haben sieben Verträge gekündigt. Unser IT-Budget ist nicht kleiner —
-              aber endlich tut es das, wofür es da ist."
-            </p>
-            <div className="quote-attr" style={{ justifyContent: 'center', marginTop: 24 }}>
-              <div className="quote-avatar" style={{ background: 'linear-gradient(135deg, #C7D2FE, #FECACA)' }} />
-              <div style={{ textAlign: 'left' }}>
-                <div className="quote-name">Dr. Schmitt</div>
-                <div className="quote-role">Schulleiter · Gesamtschule Münster</div>
-              </div>
-            </div>
-          </article>
-        </div>
-      </section>
     </>
   );
 };

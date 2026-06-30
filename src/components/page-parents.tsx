@@ -147,32 +147,6 @@ export const PageParents: React.FC<PageParentsProps> = ({ contactRef }) => {
         </div>
       </section>
 
-      {/* Quote */}
-      <section className="section">
-        <div className="container">
-          <article className="card-quote" style={{ maxWidth: 760, margin: '0 auto', textAlign: 'center', padding: 48 }}>
-            <span
-              className="material-symbols-outlined"
-              aria-hidden="true"
-              style={{ color: '#C7D2FE', fontSize: 36, marginBottom: 16 }}
-            >
-              format_quote
-            </span>
-            <p className="quote-text" style={{ fontSize: 22, lineHeight: 1.4 }}>
-              „Endlich weiß ich, wann meine Tochter eine Mathe-Arbeit schreibt — ohne
-              dass sie es mir vorher sagen muss."
-            </p>
-            <div className="quote-attr" style={{ justifyContent: 'center', marginTop: 24 }}>
-              <div className="quote-avatar" style={{ background: 'linear-gradient(135deg, #C7D2FE, #FDE68A)' }} />
-              <div style={{ textAlign: 'left' }}>
-                <div className="quote-name">Sabine K.</div>
-                <div className="quote-role">Mutter · 7. Klasse</div>
-              </div>
-            </div>
-          </article>
-        </div>
-      </section>
-
       {/* CTA */}
       <section className="section-tight">
         <div className="container" style={{ textAlign: 'center', maxWidth: 720, margin: '0 auto' }}>

@@ -65,6 +65,14 @@ button { font: inherit; cursor: pointer; border: none; background: none; }
   outline-offset: 2px;
 }
 
+/* ---------- Tagline bar ---------- */
+.tagline-bar {
+  text-align: center; padding: 7px 16px; font-size: 12.5px; font-weight: 600;
+  letter-spacing: 0.01em; color: #4338CA; background: #EEF2FF;
+  border-bottom: 1px solid rgba(199, 210, 254, 0.6);
+}
+.on-dark .tagline-bar { color: #C7D2FE; background: rgba(79, 70, 229, 0.14); border-bottom-color: rgba(51, 65, 85, 0.6); }
+
 /* ---------- Header + audience switcher ---------- */
 .header { position: sticky; top: 0; z-index: 50; background: rgba(253, 251, 247, 0.85); backdrop-filter: blur(14px) saturate(160%); -webkit-backdrop-filter: blur(14px) saturate(160%); border-bottom: 1px solid rgba(241, 233, 218, 0.9); transition: background 200ms, border-color 200ms; }
 .header.on-dark { background: rgba(8, 8, 14, 0.78); border-bottom-color: rgba(30, 41, 59, 0.8); }
@@ -83,8 +91,15 @@ button { font: inherit; cursor: pointer; border: none; background: none; }
 .switcher button.active { background: #4F46E5; color: #fff; }
 .switcher button.active:hover { color: #fff; }
 
-.header-cta { padding: 10px 18px; background: #4F46E5; color: #fff !important; border-radius: 6px; font-size: 13px; font-weight: 600; transition: background 200ms; }
+.header-actions { display: flex; align-items: center; gap: 10px; }
+
+.header-cta { padding: 10px 18px; background: #4F46E5; color: #fff !important; border-radius: 6px; font-size: 13px; font-weight: 600; transition: background 200ms, color 200ms, border-color 200ms; }
 .header-cta:hover { background: #4338CA; }
+.header-cta .material-symbols-outlined { font-size: 16px; vertical-align: -3px; margin-left: 2px; }
+.header-cta.outline { display: inline-flex; align-items: center; gap: 4px; background: transparent; color: #4F46E5 !important; border: 1px solid #C7D2FE; }
+.header-cta.outline:hover { background: #EEF2FF; }
+.on-dark .header-cta.outline { color: #C7D2FE !important; border-color: #334155; }
+.on-dark .header-cta.outline:hover { background: rgba(79, 70, 229, 0.16); }
 
 /* ---------- Photo slots (consistent radius + framing) ---------- */
 .photo-slot {
@@ -227,5 +242,7 @@ button { font: inherit; cursor: pointer; border: none; background: none; }
   .header-inner { height: auto; padding: 12px 0; }
   .switcher { flex-wrap: wrap; border-radius: 12px; }
   .switcher button { min-width: unset; flex: 1; }
+  .header-actions { width: 100%; }
+  .header-actions .header-cta { flex: 1; justify-content: center; }
   .footer-cols { grid-template-columns: repeat(2, 1fr); gap: 32px; }
 }

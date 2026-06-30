@@ -6,6 +6,7 @@ import heroTeacher from '../assets/hero-teacher.jpg';
 import schulbildMorgens from '../assets/schulbild-morgens.jpg';
 import schulbildUnterricht from '../assets/schulbild-unterricht.jpg';
 import schulbildNachmittag from '../assets/schulbild-nachmittag.jpg';
+import { CompareMatrix } from './compare-matrix';
 
 interface PageTeachersProps {
   contactRef: RefObject<ContactHandle | null>;
@@ -24,8 +25,9 @@ export const PageTeachers: React.FC<PageTeachersProps> = ({ contactRef }) => {
                 Endlich mehr Zeit für das, worauf es ankommt: Unterricht.
               </h1>
               <p className="body-lg" style={{ maxWidth: 480, marginTop: 20 }}>
-                Eine einheitliche Oberfläche für Ihre Schule – gebaut auf bewährter
-                Open-Source-Software. Sicher, DSGVO-konform, sofort einsatzbereit.
+                Eine App für alles, was Sie im Schulalltag brauchen – von Klassenbuch
+                bis Nextcloud, ein Login statt zehn. Gebaut auf einem Schulserver, der
+                bereits an tausenden Schulen läuft.
               </p>
               <div className="ctas">
                 <button
@@ -94,52 +96,17 @@ export const PageTeachers: React.FC<PageTeachersProps> = ({ contactRef }) => {
         </div>
       </section>
 
-      {/* Quotes */}
+      {/* Vergleich */}
       <section className="section section-cream">
         <div className="container">
-          <div style={{ maxWidth: 700, marginBottom: 56 }}>
-            <span className="eyebrow warm">Aus den Lehrerzimmern</span>
+          <div style={{ maxWidth: 700, marginBottom: 40 }}>
+            <span className="eyebrow warm">Im Vergleich</span>
             <h2 className="h-headline">
-              „Die App muss zu uns kommen, nicht wir zur App."
+              Wie openschooldesk gegen den Markt steht.
             </h2>
           </div>
-          <div className="grid-3">
-            <article className="card-quote">
-              <p className="quote-text">
-                „Drei Wochen ohne Passwort-Reset. Vorher war das ein wöchentliches Ritual."
-              </p>
-              <div className="quote-attr">
-                <div className="quote-avatar" />
-                <div>
-                  <div className="quote-name">Frau Müller</div>
-                  <div className="quote-role">Lehrkraft · IGS Bremen</div>
-                </div>
-              </div>
-            </article>
-            <article className="card-quote">
-              <p className="quote-text">
-                „Endlich kann ich mich auf die Klasse konzentrieren, nicht auf die Technik."
-              </p>
-              <div className="quote-attr">
-                <div className="quote-avatar" style={{ background: 'linear-gradient(135deg, #FDE68A, #FCA5A5)' }} />
-                <div>
-                  <div className="quote-name">Herr Bauer</div>
-                  <div className="quote-role">Klassenlehrer · Gymnasium Hannover</div>
-                </div>
-              </div>
-            </article>
-            <article className="card-quote">
-              <p className="quote-text">
-                „Datenschutz war für uns nie verhandelbar. Das Gefühl ist neu."
-              </p>
-              <div className="quote-attr">
-                <div className="quote-avatar" style={{ background: 'linear-gradient(135deg, #A7F3D0, #C7D2FE)' }} />
-                <div>
-                  <div className="quote-name">Frau Hartmann</div>
-                  <div className="quote-role">Fachschaftsleiterin · Realschule Köln</div>
-                </div>
-              </div>
-            </article>
+          <div style={{ background: '#fff', border: '1px solid #F1E9DA', borderRadius: 16, overflow: 'hidden' }}>
+            <CompareMatrix />
           </div>
         </div>
       </section>

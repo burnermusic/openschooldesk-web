@@ -20,6 +20,9 @@ const items: { id: Audience; label: string; icon: string }[] = [
 export const Nav: React.FC<NavProps> = ({ audience, onChange, onCtaClick, dark }) => {
   return (
     <header className={`header${dark ? ' on-dark' : ''}`}>
+      <div className="tagline-bar">
+        100% Open Source · Bis ins Klassenzimmer. Keine Kompromisse.
+      </div>
       <div className="container header-inner">
         <a
           href="#/"
@@ -44,13 +47,24 @@ export const Nav: React.FC<NavProps> = ({ audience, onChange, onCtaClick, dark }
           ))}
         </div>
 
-        <a
-          href="#kontakt"
-          className="header-cta"
-          onClick={(e) => { e.preventDefault(); onCtaClick(); }}
-        >
-          Demo anfragen
-        </a>
+        <div className="header-actions">
+          <a
+            href="https://test.openschooldesk.org"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="header-cta outline"
+          >
+            Jetzt testen
+            <span className="material-symbols-outlined" aria-hidden="true">open_in_new</span>
+          </a>
+          <a
+            href="#kontakt"
+            className="header-cta"
+            onClick={(e) => { e.preventDefault(); onCtaClick(); }}
+          >
+            Demo anfragen
+          </a>
+        </div>
       </div>
     </header>
   );
