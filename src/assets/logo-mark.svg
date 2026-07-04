@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <clipPath id="mtop"><rect x="0" y="0" width="1024" height="512"/></clipPath>
+    <clipPath id="mbot"><rect x="0" y="512" width="1024" height="512"/></clipPath>
+    <mask id="mmL">
+      <rect width="1024" height="1024" fill="white"/>
+      <g clip-path="url(#mtop)"><polygon points="635.9,171.36 930.9,341.68 930.9,682.32 635.9,852.64 340.9,682.32 340.9,341.68" fill="none" stroke="black" stroke-width="96.75999999999999"/></g>
+      <polyline points="679.17,235.06 454.97,364.5 454.97,479.07 569.03,544.93 569.03,659.5 344.83,788.94" fill="none" stroke="black" stroke-width="96.75999999999999"/>
+    </mask>
+    <mask id="mmR">
+      <rect width="1024" height="1024" fill="white"/>
+      <g clip-path="url(#mbot)"><polygon points="388.1,171.36 683.1,341.68 683.1,682.32 388.1,852.64 93.1,682.32 93.1,341.68" fill="none" stroke="black" stroke-width="96.75999999999999"/></g>
+      <polyline points="679.17,235.06 454.97,364.5 454.97,479.07 569.03,544.93 569.03,659.5 344.83,788.94" fill="none" stroke="black" stroke-width="96.75999999999999"/>
+    </mask>
+  </defs>
+  <polygon points="388.1,171.36 683.1,341.68 683.1,682.32 388.1,852.64 93.1,682.32 93.1,341.68" fill="none" stroke="#2563EB" stroke-width="49.559999999999995" mask="url(#mmL)"/>
+  <polygon points="635.9,171.36 930.9,341.68 930.9,682.32 635.9,852.64 340.9,682.32 340.9,341.68" fill="none" stroke="#2563EB" stroke-width="49.559999999999995" mask="url(#mmR)"/>
+  <polyline points="620.17,269.12 454.97,364.5 454.97,479.07 569.03,544.93 569.03,659.5 403.83,754.88" fill="none" stroke="#2563EB" stroke-width="49.559999999999995"/>
+</svg>

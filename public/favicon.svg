@@ -1,19 +1,20 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" fill="none">
-  <!--
-    openschooldesk favicon — Hexagon-Ring auf Logo-Blau.
-    Bei 16px liest sich der Ring sofort als das Markenzeichen.
-    Kein inneres Symbol — zu klein um es zu erkennen.
-  -->
-
-  <!-- Blauer Hintergrund (abgerundetes Quadrat) -->
-  <rect width="32" height="32" rx="6" fill="#2563EB"/>
-
-  <!-- Weißer Hexagon-Ring -->
-  <polygon
-    points="16,4.5 26,10.5 26,21.5 16,27.5 6,21.5 6,10.5"
-    stroke="white"
-    stroke-width="3"
-    stroke-linejoin="round"
-    fill="none"
-  />
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <rect width="1024" height="1024" rx="192" fill="#2563EB"/>
+  <defs>
+    <clipPath id="ftop"><rect x="0" y="0" width="1024" height="512"/></clipPath>
+    <clipPath id="fbot"><rect x="0" y="512" width="1024" height="512"/></clipPath>
+    <mask id="fmL">
+      <rect width="1024" height="1024" fill="white"/>
+      <g clip-path="url(#ftop)"><polygon points="629.6,188.68 909.6,350.34 909.6,673.66 629.6,835.32 349.6,673.66 349.6,350.34" fill="none" stroke="black" stroke-width="91.84"/></g>
+      <polyline points="670.67,249.14 457.87,372 457.87,480.75 566.13,543.25 566.13,652 353.33,774.86" fill="none" stroke="black" stroke-width="91.84"/>
+    </mask>
+    <mask id="fmR">
+      <rect width="1024" height="1024" fill="white"/>
+      <g clip-path="url(#fbot)"><polygon points="394.4,188.68 674.4,350.34 674.4,673.66 394.4,835.32 114.4,673.66 114.4,350.34" fill="none" stroke="black" stroke-width="91.84"/></g>
+      <polyline points="670.67,249.14 457.87,372 457.87,480.75 566.13,543.25 566.13,652 353.33,774.86" fill="none" stroke="black" stroke-width="91.84"/>
+    </mask>
+  </defs>
+  <polygon points="394.4,188.68 674.4,350.34 674.4,673.66 394.4,835.32 114.4,673.66 114.4,350.34" fill="none" stroke="white" stroke-width="47.040000000000006" mask="url(#fmL)"/>
+  <polygon points="629.6,188.68 909.6,350.34 909.6,673.66 629.6,835.32 349.6,673.66 349.6,350.34" fill="none" stroke="white" stroke-width="47.040000000000006" mask="url(#fmR)"/>
+  <polyline points="614.67,281.47 457.87,372 457.87,480.75 566.13,543.25 566.13,652 409.33,742.53" fill="none" stroke="white" stroke-width="47.040000000000006"/>
 </svg>
