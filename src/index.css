@@ -236,6 +236,24 @@ button { font: inherit; cursor: pointer; border: none; background: none; }
 /* Erste Sektion ohne oberen Trennstrich (wenn kein Hero davor steht) */
 .section-first { border-top: none; padding-top: 56px; }
 
+/* ---------- Architektur-Ebenen (IT-Seite) ---------- */
+.archstack { display: grid; gap: 10px; max-width: 860px; }
+.archstack-tag { font-size: 11px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; }
+.archstack-tag-ours { color: #C7D2FE; }
+.archstack-tag-base { color: #64748B; margin-top: 12px; }
+.archrow { display: grid; grid-template-columns: 190px 1fr; align-items: center; gap: 18px; border-radius: 14px; padding: 16px 20px; }
+.archrow.ours { background: #4F46E5; }
+.archrow.base { background: #0F172A; border: 1px solid #1E293B; }
+.archrow-label { font-family: "Work Sans", sans-serif; font-weight: 700; font-size: 15px; color: #fff; }
+.archrow.base .archrow-label { color: #E2E8F0; }
+.archrow-items { display: flex; flex-wrap: wrap; gap: 8px; }
+.archpill { font-size: 13px; font-weight: 600; padding: 6px 12px; border-radius: 8px; white-space: nowrap; }
+.archrow.ours .archpill { background: rgba(255, 255, 255, 0.16); color: #fff; }
+.archrow.base .archpill { background: #1E293B; color: #CBD5E1; }
+@media (max-width: 720px) {
+  .archrow { grid-template-columns: 1fr; gap: 10px; padding: 14px 16px; }
+}
+
 /* ---------- Plattform-Leiste ---------- */
 .platform-bar { padding: 28px 0; border-top: 1px solid rgba(241, 233, 218, 0.7); background: #FDFBF7; }
 .shell-dark .platform-bar { border-top-color: rgba(30, 41, 59, 0.6); background: #0B1120; }

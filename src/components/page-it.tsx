@@ -2,30 +2,25 @@ import React from 'react'
 import type { RefObject } from 'react';
 import { PhotoSlot } from './photo-slot';
 import type { ContactHandle } from './contact';
-import { LayerDiagram } from './layer-diagram';
+import { ArchitectureStack } from './architecture-stack';
 import { CompareMatrix } from './compare-matrix';
-import { AppBridge } from './app-bridge';
 
 interface PageITProps {
   contactRef: RefObject<ContactHandle | null>;
 }
 
-interface StackLayerProps {
+interface PillarProps {
+  icon: string;
   title: string;
-  items: string[];
-  note: string;
+  body: string;
 }
 
-function StackLayer({ title, items, note }: StackLayerProps) {
+function Pillar({ icon, title, body }: PillarProps) {
   return (
     <article className="card">
-      <h3 className="h-md">{title}</h3>
-      <p className="body" style={{ fontSize: 13, color: '#64748B', marginTop: 4 }}>{note}</p>
-      <div className="stack" style={{ marginTop: 20 }}>
-        {items.map((item) => (
-          <span key={item} className="stack-badge">{item}</span>
-        ))}
-      </div>
+      <span className="material-symbols-outlined" aria-hidden="true" style={{ color: '#818CF8', fontSize: 26 }}>{icon}</span>
+      <h3 className="h-md" style={{ marginTop: 12 }}>{title}</h3>
+      <p className="body" style={{ marginTop: 8, color: '#94A3B8', fontSize: 14 }}>{body}</p>
     </article>
   );
 }
@@ -49,7 +44,7 @@ export const PageIT: React.FC<PageITProps> = ({ contactRef: _contactRef }) => {
               <p className="body-lg" style={{ color: '#94A3B8', maxWidth: 520, marginTop: 20 }}>
                 openschooldesk ist keine Schulserver-Distribution — wir bauen die
                 App-Schicht obendrauf. Bewährte Basis (u. a. UCS@school, im Einsatz an
-                tausenden Schulen), eine moderne, einheitliche UX darüber. Mit
+                tausenden Schulen), eine moderne, einheitliche Oberfläche darüber. Mit
                 deutschem Support vom Hersteller, integriert in hochsichere
                 Umgebungen, auch On-Premise.
               </p>
@@ -62,17 +57,7 @@ export const PageIT: React.FC<PageITProps> = ({ contactRef: _contactRef }) => {
                   <span className="material-symbols-outlined" aria-hidden="true">code</span>
                   GitHub ansehen
                 </a>
-                <a href="#stack" className="btn outline-dark">Stack-Architektur</a>
-              </div>
-              <div className="term" style={{ marginTop: 32, maxWidth: 540 }}>
-                <div><span className="comment"># App-Server als Docker-Container – neben dem Schulserver</span></div>
-                <div>
-                  <span className="prompt">$ </span>
-                  <span className="cmd">docker compose up -d</span>
-                </div>
-                <div><span className="ok">✓ openschooldesk-app</span>{'  '}<span className="comment">Next.js · Node</span></div>
-                <div><span className="ok">✓ nginx</span>{'  '}<span className="comment">Reverse-Proxy · TLS</span></div>
-                <div><span className="comment">→ On-Premise, keine Cloud-Pflicht, keine externen Abhängigkeiten</span></div>
+                <a href="#architektur" className="btn outline-dark">Architektur ansehen</a>
               </div>
             </div>
             <PhotoSlot variant="stack" aspect="aspect-4-3" showMeta={false} />
@@ -80,39 +65,43 @@ export const PageIT: React.FC<PageITProps> = ({ contactRef: _contactRef }) => {
         </div>
       </section>
 
-      {/* Stack: fremde Basis vs. eigene App */}
-      <section className="section" id="stack">
+      {/* Architektur & Systemaufbau */}
+      <section className="section" id="architektur">
         <div className="container">
-          <div style={{ maxWidth: 720, marginBottom: 56 }}>
-            <span className="eyebrow">Fremde Basis, eigene App</span>
-            <h2 className="h-headline h-on-dark">Der Schulserver ist nicht unser Produkt. Die App davor schon.</h2>
-            <p className="body" style={{ marginTop: 16, maxWidth: 620, color: '#94A3B8' }}>
-              openschooldesk ist kein Fork und kein UCS-Produkt. Wir setzen als
-              eigenständige App auf bewährter Schulserver-Infrastruktur auf — und
-              konzentrieren uns als Software-Firma vollständig auf das, was darüber
-              liegt: die Oberfläche, die Lehrkräfte, Schüler und Eltern tatsächlich
-              benutzen.
+          <div style={{ maxWidth: 740, marginBottom: 48 }}>
+            <span className="eyebrow">Architektur &amp; Systemaufbau</span>
+            <h2 className="h-headline h-on-dark">
+              Eine generische App. Eine Middleware. Bewährte Basis darunter.
+            </h2>
+            <p className="body" style={{ marginTop: 16, maxWidth: 640, color: '#94A3B8' }}>
+              openschooldesk besteht aus zwei Bausteinen: einer <strong style={{ color: '#E2E8F0' }}>generischen
+              App</strong> als einheitliche Oberfläche für Web und Mobile und einer
+              <strong style={{ color: '#E2E8F0' }}> Middleware</strong>, die diese App über Single Sign-On und
+              offene APIs mit den Systemen des Schulservers verbindet. Darunter bleibt
+              alles, was Schulen ohnehin schon betreiben — wir ersetzen nichts, wir
+              führen zusammen.
             </p>
           </div>
 
-          <div style={{ marginBottom: 56 }}>
-            <AppBridge />
+          <div style={{ marginBottom: 48 }}>
+            <ArchitectureStack />
           </div>
 
-          <div style={{ marginBottom: 40, maxWidth: 560 }}>
-            <LayerDiagram />
-          </div>
-
-          <div className="grid-2">
-            <StackLayer
-              title="Was wir nicht erfunden haben"
-              items={['UCS@school', 'Proxmox VE', 'Keycloak (OIDC)', 'OPNsense']}
-              note="Fremde, bewährte Basis — im Einsatz an tausenden Schulen"
+          <div className="grid-3">
+            <Pillar
+              icon="devices"
+              title="Generische App"
+              body="Eine Oberfläche für Web, iOS und Android aus einer Codebasis — nicht an ein einzelnes Backend gebunden, sondern über offene Schnittstellen angebunden."
             />
-            <StackLayer
-              title="Was wir bauen"
-              items={['openschooldesk App', 'Kelvin-Integration', 'Nextcloud · Open-Xchange', 'SSO zu weiteren Anwendungen']}
-              note="Die App-Schicht — eine Oberfläche statt zehn Logins"
+            <Pillar
+              icon="hub"
+              title="Middleware"
+              body="Verbindet die App per SSO (OIDC/PKCE) und API-Proxy mit Kelvin, Nextcloud, Open-Xchange & Co. Access-Tokens bleiben server-seitig (httpOnly), keine Personendaten im Browser, keine Zweitdatenbank."
+            />
+            <Pillar
+              icon="deployed_code"
+              title="Betrieb"
+              body="Läuft als Docker-Container on-premise neben dem Schulserver — keine Cloud-Pflicht, keine externen Abhängigkeiten. Deutscher Support vom Hersteller."
             />
           </div>
         </div>
@@ -127,8 +116,9 @@ export const PageIT: React.FC<PageITProps> = ({ contactRef: _contactRef }) => {
             <p className="body" style={{ marginTop: 16, maxWidth: 620 }}>
               Nextcloud und Open-Xchange sind bereits sauber integriert — ein Login,
               eine Oberfläche, kein Bruch im Nutzererlebnis. Weitere pädagogische
-              Tools binden wir per SSO ein, statt eigene Insellösungen zu bauen.
-              Schritt für Schritt wird aus vielen Werkzeugen eine durchgängige App.
+              Tools binden wir über dieselbe Middleware per SSO ein, statt eigene
+              Insellösungen zu bauen. Schritt für Schritt wird aus vielen Werkzeugen
+              eine durchgängige App.
             </p>
             <div className="stack" style={{ marginTop: 24 }}>
               <span className="stack-badge">Nextcloud</span>
@@ -164,48 +154,6 @@ export const PageIT: React.FC<PageITProps> = ({ contactRef: _contactRef }) => {
           </div>
           <div style={{ background: '#fff', border: '1px solid #F1E9DA', borderRadius: 16, overflow: 'hidden' }}>
             <CompareMatrix compact />
-          </div>
-        </div>
-      </section>
-
-      {/* Kelvin API */}
-      <section className="section section-alt">
-        <div className="container">
-          <div className="split split-tight">
-            <div>
-              <span className="eyebrow">Kelvin API</span>
-              <h2 className="h-headline">Native Extension. Kein Replikat.</h2>
-              <p className="body" style={{ marginTop: 20 }}>
-                openschooldesk ist API-Client, nicht Datensilo. Tokens bleiben
-                server-seitig (httpOnly), jede Anfrage geht über den Server-Proxy.
-                Keine PII im Browser, keine Replikation, kein eigenes Backend, das
-                gewartet werden muss.
-              </p>
-              <div className="stack" style={{ marginTop: 24 }}>
-                <span className="stack-badge">Next.js 14</span>
-                <span className="stack-badge">NextAuth v5</span>
-                <span className="stack-badge">Kelvin v1</span>
-                <span className="stack-badge">PKCE</span>
-                <span className="stack-badge">TypeScript strict</span>
-              </div>
-            </div>
-            <div className="card">
-              <h3 className="h-md">So fließen die Daten</h3>
-              <ul style={{ marginTop: 16, paddingLeft: 0, listStyle: 'none', display: 'grid', gap: 14 }}>
-                <li className="body" style={{ display: 'flex', gap: 10 }}>
-                  <span className="material-symbols-outlined" aria-hidden="true" style={{ color: '#4F46E5', fontSize: 20 }}>lock</span>
-                  Anmeldung per Single Sign-On (Keycloak / OIDC, PKCE) – Zugangsdaten verlassen den Schulserver nie.
-                </li>
-                <li className="body" style={{ display: 'flex', gap: 10 }}>
-                  <span className="material-symbols-outlined" aria-hidden="true" style={{ color: '#4F46E5', fontSize: 20 }}>dns</span>
-                  Alle Kelvin-Aufrufe laufen über den App-Server als Proxy – Access-Tokens bleiben in httpOnly-Cookies.
-                </li>
-                <li className="body" style={{ display: 'flex', gap: 10 }}>
-                  <span className="material-symbols-outlined" aria-hidden="true" style={{ color: '#4F46E5', fontSize: 20 }}>visibility_off</span>
-                  Im Browser landen nur die angezeigten Daten – keine Personendaten auf Vorrat, keine Zweitdatenbank.
-                </li>
-              </ul>
-            </div>
           </div>
         </div>
       </section>
