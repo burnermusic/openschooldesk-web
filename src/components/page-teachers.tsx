@@ -3,10 +3,8 @@ import type { RefObject } from 'react';
 
 import type { ContactHandle } from './contact';
 import heroTeacher from '../assets/hero-teacher.jpg';
-import schulbildMorgens from '../assets/schulbild-morgens.jpg';
-import schulbildUnterricht from '../assets/schulbild-unterricht.jpg';
-import schulbildNachmittag from '../assets/schulbild-nachmittag.jpg';
 import { CompareMatrix } from './compare-matrix';
+import { AppBridge } from './app-bridge';
 
 interface PageTeachersProps {
   contactRef: RefObject<ContactHandle | null>;
@@ -22,12 +20,12 @@ export const PageTeachers: React.FC<PageTeachersProps> = ({ contactRef }) => {
             <div>
               <span className="eyebrow">Für Lehrkräfte</span>
               <h1 className="h-display">
-                Endlich mehr Zeit für das, worauf es ankommt: Unterricht.
+                Die erste Open-Source-App für Ihren Schulserver.
               </h1>
               <p className="body-lg" style={{ maxWidth: 480, marginTop: 20 }}>
-                Eine App für alles, was Sie im Schulalltag brauchen – von Klassenbuch
-                bis Nextcloud, ein Login statt zehn. Gebaut auf einem Schulserver, der
-                bereits an tausenden Schulen läuft.
+                Eine Oberfläche für alles, was Ihre Schule schon hat: Dateien, Kalender,
+                Klassen – ein Login statt zehn. openschooldesk legt die App-Schicht auf
+                bewährte Open-Source-Systeme, die an tausenden Schulen laufen.
               </p>
               <div className="ctas">
                 <button
@@ -37,7 +35,7 @@ export const PageTeachers: React.FC<PageTeachersProps> = ({ contactRef }) => {
                   Für meine Schule anfragen
                   <span className="material-symbols-outlined" aria-hidden="true">arrow_forward</span>
                 </button>
-                <a href="#tag" className="btn warm">Ein typischer Schultag</a>
+                <a href="#prinzip" className="btn warm">So funktioniert es</a>
               </div>
             </div>
             <div className="photo-slot aspect-4-3">
@@ -51,48 +49,25 @@ export const PageTeachers: React.FC<PageTeachersProps> = ({ contactRef }) => {
         </div>
       </section>
 
-      {/* Story strip — "Ein typischer Schultag" */}
-      <section className="section" id="tag">
+      {/* Prinzip: eine App vorne, Open-Source-Systeme dahinter */}
+      <section className="section" id="prinzip">
         <div className="container">
-          <div style={{ maxWidth: 700, marginBottom: 56 }}>
-            <span className="eyebrow">Ein typischer Schultag</span>
+          <div style={{ maxWidth: 720, marginBottom: 48 }}>
+            <span className="eyebrow">Das Prinzip</span>
             <h2 className="h-headline">
-              Vom Morgenkaffee bis zur letzten Stunde — alles greifbar.
+              Eine Oberfläche. Dahinter die Systeme, die Ihre Schule schon nutzt.
             </h2>
+            <p className="body" style={{ marginTop: 16, maxWidth: 620 }}>
+              openschooldesk erfindet nichts neu, was es schon gibt. Jede Funktion in
+              der App greift auf eine bewährte Open-Source-Anwendung zu – ohne dass Sie
+              sich zehnmal anmelden oder zehn Systeme kennen müssen.
+            </p>
           </div>
-          <div className="grid-3">
-            <article className="card card-warm">
-              <div className="photo-slot aspect-4-3">
-                <img src={schulbildMorgens} alt="Laptop mit Schulapp am Morgen" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
-              </div>
-              <h3 className="h-md" style={{ marginTop: 20 }}>Morgens · 07:45</h3>
-              <p className="body" style={{ marginTop: 8 }}>
-                Ein Login. Stundenplan, Materialien, Vertretungen, Klassenbuch – alles
-                schon offen, wenn der erste Kaffee fertig ist.
-              </p>
-            </article>
-            <article className="card card-warm">
-              <div className="photo-slot aspect-4-3">
-                <img src={schulbildUnterricht} alt="Tablet im Unterricht mit Schülern" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
-              </div>
-              <h3 className="h-md" style={{ marginTop: 20 }}>Im Unterricht · 10:20</h3>
-              <p className="body" style={{ marginTop: 8 }}>
-                Klassenraum aus der Cloud starten, Aufgabe verteilen, Bildschirme im
-                Blick behalten – ohne dass Schülerinnen und Schüler sich neu einloggen
-                müssen.
-              </p>
-            </article>
-            <article className="card card-warm">
-              <div className="photo-slot aspect-4-3">
-                <img src={schulbildNachmittag} alt="Desktop-Arbeitsplatz am Nachmittag" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
-              </div>
-              <h3 className="h-md" style={{ marginTop: 20 }}>Nachmittags · 15:30</h3>
-              <p className="body" style={{ marginTop: 8 }}>
-                Korrekturen, Elternnachrichten, nächste Woche planen. Geht von
-                zuhause genauso wie aus dem Lehrerzimmer.
-              </p>
-            </article>
-          </div>
+          <AppBridge />
+          <p className="body" style={{ marginTop: 40, textAlign: 'center', fontSize: 14, color: '#64748B' }}>
+            Quelloffen unter <strong style={{ color: '#0F172A' }}>AGPLv3</strong> – keine Lizenzgebühren pro Nutzer,
+            kein Lock-in. Öffentliche Mittel verdienen quelloffenen Code.
+          </p>
         </div>
       </section>
 

@@ -2,7 +2,6 @@ import React from 'react'
 import type { RefObject } from 'react';
 
 import type { ContactHandle } from './contact';
-import heroLeadership from '../assets/hero-leadership.jpg';
 
 interface PageLeadershipProps {
   contactRef: RefObject<ContactHandle | null>;
@@ -52,44 +51,11 @@ function CompareTable() {
   );
 }
 
-export const PageLeadership: React.FC<PageLeadershipProps> = ({ contactRef }) => {
+export const PageLeadership: React.FC<PageLeadershipProps> = ({ contactRef: _contactRef }) => {
   return (
     <>
-      <section className="hero-warm">
-        <div className="container">
-          <div className="hero-split">
-            <div>
-              <span className="eyebrow">Für Schulleitung</span>
-              <h1 className="h-display">Eine Entscheidung. Für alle. Für Jahre.</h1>
-              <p className="body-lg" style={{ maxWidth: 480, marginTop: 20 }}>
-                Schluss mit zehn Verträgen, fünf Logins und drei Datenschutzvereinbarungen.
-                openschooldesk bündelt, was Ihre Schule braucht — unter einer Oberfläche,
-                unter Ihrer Kontrolle.
-              </p>
-              <div className="ctas">
-                <button
-                  className="btn primary"
-                  onClick={() => contactRef.current?.focus()}
-                >
-                  Termin vereinbaren
-                  <span className="material-symbols-outlined" aria-hidden="true">arrow_forward</span>
-                </button>
-                <a href="#pillars" className="btn warm">Die drei Säulen</a>
-              </div>
-            </div>
-            <div className="photo-slot aspect-4-3">
-              <img
-                src={heroLeadership}
-                alt="Schulleiterin mit Tablet und digitalem Klassenbuch"
-                style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
-              />
-            </div>
-          </div>
-        </div>
-      </section>
-
       {/* Three pillars */}
-      <section className="section" id="pillars">
+      <section className="section section-first" id="pillars">
         <div className="container">
           <div style={{ maxWidth: 720, marginBottom: 56 }}>
             <span className="eyebrow">Die drei Säulen</span>

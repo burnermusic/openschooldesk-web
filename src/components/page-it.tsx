@@ -4,6 +4,7 @@ import { PhotoSlot } from './photo-slot';
 import type { ContactHandle } from './contact';
 import { LayerDiagram } from './layer-diagram';
 import { CompareMatrix } from './compare-matrix';
+import { AppBridge } from './app-bridge';
 
 interface PageITProps {
   contactRef: RefObject<ContactHandle | null>;
@@ -91,6 +92,10 @@ export const PageIT: React.FC<PageITProps> = ({ contactRef: _contactRef }) => {
               liegt: die Oberfläche, die Lehrkräfte, Schüler und Eltern tatsächlich
               benutzen.
             </p>
+          </div>
+
+          <div style={{ marginBottom: 56 }}>
+            <AppBridge />
           </div>
 
           <div style={{ marginBottom: 40, maxWidth: 560 }}>

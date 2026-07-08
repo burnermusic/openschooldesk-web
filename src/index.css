@@ -232,6 +232,21 @@ button { font: inherit; cursor: pointer; border: none; background: none; }
 .hero p.body-lg { max-width: 480px; margin-top: 20px; }
 .hero .ctas { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 32px; }
 
+/* Erste Sektion ohne oberen Trennstrich (wenn kein Hero davor steht) */
+.section-first { border-top: none; padding-top: 56px; }
+
+/* ---------- App-Bridge-Grafik ---------- */
+.app-bridge { max-width: 940px; margin: 0 auto; }
+.app-bridge svg { width: 100%; height: auto; display: block; }
+.ab-cap { font-family: "Work Sans", sans-serif; font-size: 13px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; fill: #94A3B8; }
+.ab-brand { font-family: "Work Sans", sans-serif; font-size: 13px; font-weight: 700; fill: #0F172A; }
+.ab-row-label { font-family: "Inter", sans-serif; font-size: 13px; font-weight: 600; fill: #0F172A; }
+.ab-row-sub { font-family: "Inter", sans-serif; font-size: 9.5px; fill: #94A3B8; }
+.ab-card-name { font-family: "Work Sans", sans-serif; font-size: 18px; font-weight: 700; fill: #0F172A; }
+.ab-card-role { font-family: "Inter", sans-serif; font-size: 13px; fill: #475569; }
+.ab-card-tag { font-family: "Inter", sans-serif; font-size: 9px; font-weight: 700; letter-spacing: 0.08em; fill: #94A3B8; }
+.shell-dark .ab-brand, .shell-dark .ab-card-name { fill: #0F172A; }
+
 /* ---------- Mobile ---------- */
 @media (max-width: 960px) {
   .h-display { font-size: 40px; }

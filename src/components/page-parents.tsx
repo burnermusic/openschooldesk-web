@@ -72,7 +72,6 @@ export const PageParents: React.FC<PageParentsProps> = ({ contactRef }) => {
                   Für unsere Schule anfragen
                   <span className="material-symbols-outlined" aria-hidden="true">arrow_forward</span>
                 </button>
-                <a href="#was" className="btn warm">Was Sie als Eltern sehen</a>
               </div>
             </div>
             <div className="photo-slot aspect-4-3">
