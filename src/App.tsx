@@ -6,6 +6,7 @@ import { PageTeachers } from './components/page-teachers';
 import { PageLeadership } from './components/page-leadership';
 import { PageIT } from './components/page-it';
 import { PageParents } from './components/page-parents';
+import { PlatformBar } from './components/platform-bar';
 
 function parseAudienceFromHash(): Audience {
   const hash = (window.location.hash || '#/').replace(/^#\/?/, '');
@@ -82,6 +83,7 @@ const App: React.FC = () => {
       />
       <main>
         <PageComponent contactRef={contactRef} />
+        <PlatformBar />
         <Contact ref={contactRef} headline={copy.headline} sub={copy.sub} />
       </main>
       <Footer deep={isDark} />

@@ -236,6 +236,19 @@ button { font: inherit; cursor: pointer; border: none; background: none; }
 /* Erste Sektion ohne oberen Trennstrich (wenn kein Hero davor steht) */
 .section-first { border-top: none; padding-top: 56px; }
 
+/* ---------- Plattform-Leiste ---------- */
+.platform-bar { padding: 28px 0; border-top: 1px solid rgba(241, 233, 218, 0.7); background: #FDFBF7; }
+.shell-dark .platform-bar { border-top-color: rgba(30, 41, 59, 0.6); background: #0B1120; }
+.platform-inner { display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 14px 28px; }
+.platform-label { font-family: "Work Sans", sans-serif; font-size: 13px; font-weight: 700; letter-spacing: 0.02em; color: #0F172A; }
+.shell-dark .platform-label { color: #E2E8F0; }
+.platform-logos { display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 12px 24px; }
+.platform-item { display: inline-flex; align-items: center; gap: 8px; font-size: 14px; font-weight: 600; color: #475569; }
+.platform-item svg { color: #0F172A; }
+.shell-dark .platform-item { color: #94A3B8; }
+.shell-dark .platform-item svg { color: #CBD5E1; }
+.platform-note { font-size: 13px; color: #94A3B8; }
+
 /* ---------- App-Bridge-Grafik ---------- */
 .app-bridge { max-width: 940px; margin: 0 auto; }
 .app-bridge svg { width: 100%; height: auto; display: block; }
