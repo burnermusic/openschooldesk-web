@@ -37,8 +37,11 @@ export const PageIT: React.FC<PageITProps> = ({ contactRef: _contactRef }) => {
         <div className="container">
           <div className="hero-split">
             <div>
-              <span className="chip chip-dark" style={{ marginBottom: 24 }}>
+              <span className="chip chip-dark" style={{ marginBottom: 16 }}>
                 Open Source · Deutscher Support · On-Prem-fähig
+              </span>
+              <span className="chip chip-beta" style={{ marginBottom: 24, marginLeft: 8 }}>
+                Beta
               </span>
               <h1 className="h-display h-on-dark">
                 Die App für euren Schulserver.
@@ -50,6 +53,10 @@ export const PageIT: React.FC<PageITProps> = ({ contactRef: _contactRef }) => {
                 deutschem Support vom Hersteller, integriert in hochsichere
                 Umgebungen, auch On-Premise.
               </p>
+              <p className="body" style={{ color: '#64748B', fontSize: 14, marginTop: 12, maxWidth: 520 }}>
+                Aktuell im Beta-Status: Kernfunktionen laufen produktiv im Pilot,
+                der Funktionsumfang wächst kontinuierlich.
+              </p>
               <div className="ctas">
                 <a href="#github" className="btn primary">
                   <span className="material-symbols-outlined" aria-hidden="true">code</span>
@@ -58,20 +65,14 @@ export const PageIT: React.FC<PageITProps> = ({ contactRef: _contactRef }) => {
                 <a href="#stack" className="btn outline-dark">Stack-Architektur</a>
               </div>
               <div className="term" style={{ marginTop: 32, maxWidth: 540 }}>
+                <div><span className="comment"># App-Server als Docker-Container – neben dem Schulserver</span></div>
                 <div>
                   <span className="prompt">$ </span>
-                  <span className="cmd">curl -sSL get.openschooldesk.org | bash</span>
-                  {'  '}
-                  <span className="comment"># alles in einem Schritt</span>
+                  <span className="cmd">docker compose up -d</span>
                 </div>
-                <div>
-                  <span className="comment">→ provisioniert Hypervisor · Identitäten · Apps · Clients</span>
-                </div>
-                <div>
-                  <span className="ok">✓ 247 Clients erreichbar</span>
-                  {' · '}
-                  <span className="comment">8m 14s</span>
-                </div>
+                <div><span className="ok">✓ openschooldesk-app</span>{'  '}<span className="comment">Next.js · Node</span></div>
+                <div><span className="ok">✓ nginx</span>{'  '}<span className="comment">Reverse-Proxy · TLS</span></div>
+                <div><span className="comment">→ On-Premise, keine Cloud-Pflicht, keine externen Abhängigkeiten</span></div>
               </div>
             </div>
             <PhotoSlot variant="stack" aspect="aspect-4-3" showMeta={false} />
@@ -188,15 +189,22 @@ export const PageIT: React.FC<PageITProps> = ({ contactRef: _contactRef }) => {
                 <span className="stack-badge">TypeScript strict</span>
               </div>
             </div>
-            <div className="term">
-              <div><span className="comment"># app/api/kelvin/[...path]/route.ts</span></div>
-              <div><span style={{ color: '#C7D2FE' }}>export async function</span> <span className="cmd">GET</span>(request{'{'}{'}'})</div>
-              <div>{'  '}<span style={{ color: '#C7D2FE' }}>const</span> session = <span style={{ color: '#C7D2FE' }}>await</span> auth();</div>
-              <div>{'  '}<span style={{ color: '#C7D2FE' }}>if</span> (!session?.accessToken)</div>
-              <div>{'    '}<span style={{ color: '#C7D2FE' }}>return</span> Response.json(...);</div>
-              <div>{'  '}<span className="comment">// inject server-side</span></div>
-              <div>{'  '}<span className="cmd">fetch</span>(KELVIN + path, {'{'} headers {'}'});</div>
-              <div>{'}'}</div>
+            <div className="card">
+              <h3 className="h-md">So fließen die Daten</h3>
+              <ul style={{ marginTop: 16, paddingLeft: 0, listStyle: 'none', display: 'grid', gap: 14 }}>
+                <li className="body" style={{ display: 'flex', gap: 10 }}>
+                  <span className="material-symbols-outlined" aria-hidden="true" style={{ color: '#4F46E5', fontSize: 20 }}>lock</span>
+                  Anmeldung per Single Sign-On (Keycloak / OIDC, PKCE) – Zugangsdaten verlassen den Schulserver nie.
+                </li>
+                <li className="body" style={{ display: 'flex', gap: 10 }}>
+                  <span className="material-symbols-outlined" aria-hidden="true" style={{ color: '#4F46E5', fontSize: 20 }}>dns</span>
+                  Alle Kelvin-Aufrufe laufen über den App-Server als Proxy – Access-Tokens bleiben in httpOnly-Cookies.
+                </li>
+                <li className="body" style={{ display: 'flex', gap: 10 }}>
+                  <span className="material-symbols-outlined" aria-hidden="true" style={{ color: '#4F46E5', fontSize: 20 }}>visibility_off</span>
+                  Im Browser landen nur die angezeigten Daten – keine Personendaten auf Vorrat, keine Zweitdatenbank.
+                </li>
+              </ul>
             </div>
           </div>
         </div>
