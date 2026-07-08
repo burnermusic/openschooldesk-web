@@ -37,7 +37,7 @@ const contactCopy: Record<Audience, { headline: string; sub: string }> = {
   },
   it: {
     headline: 'Stack-Demo für IT & Träger',
-    sub:      'Architektur, Provisionierung, Kelvin-Integration. Ingenieur zu Ingenieur.',
+    sub:      'Architektur, Provisionierung, Kelvin-Integration — technisch fundiert und konkret.',
   },
   parents: {
     headline: 'Info-Mail für unsere Schule',

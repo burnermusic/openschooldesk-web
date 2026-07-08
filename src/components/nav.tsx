@@ -49,15 +49,6 @@ export const Nav: React.FC<NavProps> = ({ audience, onChange, onCtaClick, dark }
 
         <div className="header-actions">
           <a
-            href="https://test.openschooldesk.org"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="header-cta outline"
-          >
-            Jetzt testen
-            <span className="material-symbols-outlined" aria-hidden="true">open_in_new</span>
-          </a>
-          <a
             href="#kontakt"
             className="header-cta"
             onClick={(e) => { e.preventDefault(); onCtaClick(); }}
